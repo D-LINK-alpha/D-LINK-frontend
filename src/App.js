@@ -4,6 +4,7 @@ function App() {
       <div>
           {/*tailwind 예시*/}
         <h1 className="text-amber-900 text-5xl">hi</h1>
+          <p>브랜치 실험 중이에요</p>
       </div>
   );
 }
