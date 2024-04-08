@@ -12,9 +12,9 @@ const SignInPage = () => {
         간편하게 로그인하고 <br />
         DLNK 이용해보세요.
       </div>
-      <div className="flex justify-center pt-[56px]">
+      <a href={`${process.env.REACT_APP_API_URL}/oauth2/authorization/kakao`} className="flex justify-center pt-[56px]">
         <KakaoLogin/>
-      </div>
+      </a>
       <div className="text-[#868686] text-sm pt-[22px]">
         DLNK가 처음이신가요?
         <a href={"/"} className="text-[#DBDBDB] underline pl-2 text-sm">회원가입</a>
