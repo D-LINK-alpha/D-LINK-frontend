@@ -5,26 +5,35 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
+import PropTypes from 'prop-types';
+import { ReactComponent as BackIcon } from '../../../assets/back.svg';
+import { ReactComponent as AlarmIcon } from '../../../assets/alarm.svg';
 
-export default function ButtonAppBar() {
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+
+export default function Header({ title }) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    // <Box sx={{ flexGrow: 1 }}>
+    <Box>
+      <AppBar position="static" sx={{ backgroundColor: '#232322' }}>
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
-            color="inherit"
+            color="main"
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            <MenuIcon />
+            <BackIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            {title}
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button>
+            <AlarmIcon />
+          </Button>
         </Toolbar>
       </AppBar>
     </Box>
