@@ -1,12 +1,12 @@
 import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import OnboardingPage from './pages/OnboardingPage/onboardingPage';
+import ResultPage from './pages/ResultPage/resultPage';
 
 const App = () => {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<OnboardingPage />} />
+        <Route path="/" element={<ResultPage />} />
       </Routes>
     </div>
   );
