@@ -7,17 +7,23 @@ import Box from '@mui/material/Box';
 
 const Card = ({ item }) => {
   return (
-    <div className=" ">
-      <div className="grid grid-cols-1 border border-gray-200 rounded-3xl items-center w-2/5 h-2/3 min-w-40  min-h-60 max-h-60">
-        <span className="text-white text-4xl flex justify-start">
+    <div className="grid grid-cols-1 w-full max-w-40  h-full max-h-60 place-items-center">
+      <div className="border border-gray-200 rounded-3xl w-fit max-w-40 max-h-56">
+        <span className="text-white text-4xl flex justify-start pl-4 pt-1">
           {item.similarity}
         </span>
-        <h2 className="text-lg text-white font-bold truncate">{item.menu}</h2>
-        <div className="grid grid-cols-2">
-          <div className="text-white mb-2 text-xs">{item.cafe}</div>
-          <div className="text-white text-xs">{item.price}</div>
+        <div className="truncate max-w-40">
+          <span className="text-lg text-white font-bold flex justify-start pl-4 ">
+            {item.menu}
+          </span>
         </div>
-        <ResultPic className="grid place-items-center" />
+        <div className="grid grid-cols-2 grid-flow-row pl-4">
+          <div className="text-white mb-2 text-xs truncate">{item.cafe}</div>
+          <div className="text-white text-xs pl-2">{item.price}</div>
+        </div>
+        <div className="grid place-items-center w-4/5">
+          <ResultPic />
+        </div>
       </div>
     </div>
   );
@@ -77,50 +83,7 @@ const ResultPage = () => {
       price: '5800원',
     },
   ]);
-  // const data = [
-  //   {
-  //     similarity: '98%',
-  //     menu: '그린티 라떼 더블샷',
-  //     cafe: '오설록',
-  //     price: '5800원',
-  //   },
-  //   {
-  //     similarity: '85%',
-  //     menu: '쇼콜라 말차 모카',
-  //     cafe: '엔제리너스',
-  //     price: '6100원',
-  //   },
-  //   {
-  //     similarity: '83%',
-  //     menu: '말차말왕말왕 초콜릿 라떼',
-  //     cafe: '스타벅스',
-  //     price: '6700원',
-  //   },
-  //   {
-  //     similarity: '81%',
-  //     menu: '밀크폼 그린티',
-  //     cafe: '엔제리너스',
-  //     price: '6100원',
-  //   },
-  //   {
-  //     similarity: '70%',
-  //     menu: '오이도의 왕 류건 땀티',
-  //     cafe: '꿉스케또',
-  //     price: '5600원',
-  //   },
-  //   {
-  //     similarity: '66%',
-  //     menu: '정한결',
-  //     cafe: '이안테라디움',
-  //     price: '6500원',
-  //   },
-  //   {
-  //     similarity: '56%',
-  //     menu: '에궁연진',
-  //     cafe: '금천구',
-  //     price: '5800원',
-  //   },
-  // ];
+
   const sortBySimilarity = () => {
     const sortedData = [...data].sort((a, b) => {
       const similarityA = parseFloat(a.similarity.replace(/\D/g, ''));
@@ -191,7 +154,7 @@ const ResultPage = () => {
           </Button>
         </ButtonGroup>
       </Box>
-      <div className="flex flex-wrap justify-center">
+      <div className="flex flex-wrap justify-center gap-4">
         {data.map((item, index) => (
           <Card key={index} item={item} />
         ))}
