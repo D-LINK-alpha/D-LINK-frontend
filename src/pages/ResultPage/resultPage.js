@@ -1,28 +1,34 @@
 import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
-import { ReactComponent as ResultPic } from '../../assets/resultpic.svg';
+// import { ReactComponent as ResultPic } from '../../assets/resultpic.svg';
 import { Button } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Box from '@mui/material/Box';
+import { ReactComponent as ResultSample } from '../../assets/resultSample.svg';
 
 const Card = ({ item }) => {
   return (
-    <div className="grid grid-cols-1 w-full max-w-40  h-full max-h-60 place-items-center">
-      <div className="border border-gray-200 rounded-3xl w-fit max-w-40 max-h-56">
-        <span className="text-white text-4xl flex justify-start pl-4 pt-1">
+    <div className="grid grid-cols-1 w-full h-full max-w-40 place-items-center">
+      <div className="border border-gray-200 rounded-3xl max-w-40 max-h-60 w-full">
+        <span className="text-white text-4xl flex justify-start pl-4 pt-6">
           {item.similarity}
         </span>
-        <div className="truncate max-w-40">
-          <span className="text-lg text-white font-bold flex justify-start pl-4 ">
+        <div className="max-w-40">
+          <span className="truncate overflow-hidden hover:text-clip text-sm text-white font-bold flex justify-start pl-4 max-w-36">
             {item.menu}
           </span>
         </div>
-        <div className="grid grid-cols-2 grid-flow-row pl-4">
-          <div className="text-white mb-2 text-xs truncate">{item.cafe}</div>
-          <div className="text-white text-xs pl-2">{item.price}</div>
+        <div className="pl-4 flex">
+          <div className="text-white text-xs truncate justify-start">
+            {item.cafe}
+          </div>
+          <div className="text-white text-xs pl-2 justify-start">
+            {item.price}
+          </div>
         </div>
-        <div className="grid place-items-center w-4/5">
-          <ResultPic />
+        <div className="grid place-items-center">
+          {/*<ResultPic />*/}
+          <ResultSample />
         </div>
       </div>
     </div>
