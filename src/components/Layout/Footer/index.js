@@ -23,24 +23,41 @@ export default function LabelBottomNavigation() {
         color: '#ffffff',
         height: '83px',
         width: '100%',
+        '& .MuiBottomNavigationAction-label': {
+          color: '#ffffff',
+          fontSize: '7px !important',
+        },
       }}
     >
-      <BottomNavigationAction label="Home" value="home" icon={<HomeIcon />} />
+      <BottomNavigationAction
+        label="Home"
+        value="home"
+        icon={<HomeIcon />}
+        sx={{ minWidth: 'unset', color: '#ffffff' }}
+      />
       <BottomNavigationAction
         label="Community"
         value="community"
         icon={<CommunityIcon />}
+        sx={{ minWidth: 'unset' }}
       />
-      <BottomNavigationAction label="Main" value="main" icon={<DrinkIcon />} />
+      <BottomNavigationAction
+        label="Main"
+        value="main"
+        icon={<DrinkIcon />}
+        sx={{ minWidth: 'unset' }}
+      />
       <BottomNavigationAction
         label="MyPage"
         value="myPage"
         icon={<MyPageIcon />}
+        sx={{ minWidth: 'unset' }}
       />
       <BottomNavigationAction
         label="Setting"
         value="setting"
         icon={<SettingIcon />}
+        sx={{ minWidth: 'unset' }}
       />
     </BottomNavigation>
   );
