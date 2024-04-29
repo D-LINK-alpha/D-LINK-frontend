@@ -1,4 +1,5 @@
 import * as React from 'react';
+import MuiButton from '../../components/Button/muiButton';
 import { ReactComponent as OnboardingImage } from '../../assets/Group 36.svg';
 
 const OnboardingPage = () => {
@@ -18,10 +19,10 @@ const OnboardingPage = () => {
         </p>
       </div>
       <div className="flex justify-center pt-8">
-        {/*<MuiButton*/}
-        {/*  text="시작"*/}
-        {/*  className="w-44 h-12 rounded-3xl bg-[#3FCC7C] text-lg"*/}
-        {/*/>*/}
+        <MuiButton
+          text="시작하기"
+          className="w-44 h-12 rounded-3xl bg-[#3FCC7C] text-lg"
+        />
       </div>
       <div className="pt-5 text-gray-color">
         <p>새로운 계정 만들기</p>
