@@ -5,7 +5,7 @@ import { ReactComponent as GreenIcon } from "../../assets/green_small.svg";
 import { ReactComponent as BlueIcon } from "../../assets/blue.svg";
 import { ReactComponent as YellowIcon } from "../../assets/yellow.svg";
 
-const Item = ({ drinkName, similarity, cafeName, drinkType, size }) => {
+const Item = ({drinkName, similarity, cafeName, drinkType, index, size }) => {
   let iconComponent;
 
   // 아이콘 설정
@@ -51,13 +51,15 @@ const Item = ({ drinkName, similarity, cafeName, drinkType, size }) => {
               {drinkName}
             </div>
           </div>
-          <div className='pl-[44px] pr-[19px] pb-[20px] content-end'>
+          <div className='pl-[32px] pr-[19px] pb-[20px] content-end'>
             {iconComponent}
           </div>
         </>
       ) : (
         <div className="flex justify-between w-[329px] h-[48px] pt-[13px] pl-[17px] pr-[19px] text-[#232322] text-[14px] font-bold">
-          <div className="w-[22px] h-[22px] rounded-full bg-[#232322]"></div>
+          <div className="content-center w-[22px] h-[22px] rounded-full bg-[#232322] text-white text-[12px]">
+            {index}
+          </div>
           {drinkName}
         </div>
       )}
@@ -70,6 +72,7 @@ Item.propTypes = {
   similarity: PropTypes.string.isRequired,
   cafeName: PropTypes.string.isRequired,
   drinkType: PropTypes.string.isRequired,
+  index: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Item from '../../components/Item/item';
+import InfoBar from '../../components/Layout/Header/infoBar';
 
 const LandingPage = () => {
   const dummyData = [
@@ -11,6 +12,7 @@ const LandingPage = () => {
 
   return (
     <div className="flex flex-col ">
+      <InfoBar name={'쿠민'}/>
       <div className="flex items-end text-white text-[24px] pt-[18px] pl-[35px]">
         Today&apos;s DLNK
         <a href={'/'} className="text-[#DBDBDB] underline text-[12px] pb-[4px] pl-[100px]">더보기</a>
@@ -23,6 +25,7 @@ const LandingPage = () => {
             similarity={item.similarity}
             cafeName={item.cafeName}
             drinkType={item.drinkType}
+            index={index + 1}
             size={index === 0 ? 'big' : 'small'}
           />
         ))}
