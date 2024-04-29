@@ -5,11 +5,12 @@ import PropTypes from 'prop-types';
 
 TextFields.propTypes = {
   text: PropTypes.string.isRequired,
-  className: PropTypes.string, // CSS 클래스 prop 추가
-  textColor: PropTypes.string, // 텍스트 색상 prop 추가
+  className: PropTypes.string,
+  textColor: PropTypes.string,
+  labelColor: PropTypes.string,
 };
 
-export default function TextFields({ text, className, textColor }) {
+export default function TextFields({ text, textColor, labelColor, className }) {
   return (
     <Box
       component="form"
@@ -23,7 +24,15 @@ export default function TextFields({ text, className, textColor }) {
         id="standard-basic"
         label={text}
         variant="standard"
-        InputProps={{ style: { color: textColor } }}
+        className={className} // 기존 클래스 유지
+        InputProps={{ style: { color: textColor || '#ffffff' } }}
+        sx={{
+          '& label': { color: labelColor || '#ffffff' }, // label 색상 변경
+          '& css-1eed5fa-MuiInputBase-root-MuiInput-root': {
+            border: 'red',
+          }, // after 상태일 때 border 색상 투명으로 변경
+          '& fieldset': { borderColor: 'white' }, // 항상 하얀색 border
+        }}
       />
     </Box>
   );
