@@ -13,7 +13,7 @@ const Join = () => {
         {/*/>*/}
         <input
           placeholder="본명이나 닉네임을 입력하세요"
-          className="text-gray-500 bg-transparent text-lg
+          className="text-join-color bg-transparent text-lg
           w-56 font-medium focus:outline-none
           border-b-[1px] border-solid border-b-white
           text-center"
