@@ -1,8 +1,4 @@
 import * as React from 'react';
-// import { styled } from '@mui/material/styles';
-// import FormGroup from '@mui/material/FormGroup';
-// import FormControlLabel from '@mui/material/FormControlLabel';
-// import Switch from '@mui/material/Switch';
 import MuiButton from '../../components/Button/muiButton';
 import { ReactComponent as OnboardingImage } from '../../assets/Group 36.svg';
 
@@ -34,5 +30,4 @@ const OnboardingPage = () => {
     </div>
   );
 };
-
 export default OnboardingPage;
