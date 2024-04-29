@@ -18,7 +18,7 @@ const OnboardingPage = () => {
           추천해드릴게요.
         </p>
       </div>
-      <div className="flex justify-center pt-8">
+      <div className="flex justify-center pt-10">
         <MuiButton
           text="시작하기"
           className="w-44 h-12 rounded-3xl bg-[#3FCC7C] text-lg"
