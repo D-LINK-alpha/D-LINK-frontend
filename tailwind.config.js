@@ -13,6 +13,7 @@ module.exports = {
       colors: {
         'gray-color': '#868686' /*onboarding 작은 글씨 색상*/,
         'main-color': '#232322',
+        'join-color': '#B7B7B7' /*join Input 색상*/,
       },
     },
   },
