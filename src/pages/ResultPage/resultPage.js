@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-// import { ReactComponent as ResultPic } from '../../assets/resultpic.svg';
 import { Button } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Card from '../../components/card';
 import Box from '@mui/material/Box';
+import { useNavigate } from 'react-router-dom';
 
 const ResultPage = () => {
   const [data, setData] = useState([
@@ -51,6 +51,24 @@ const ResultPage = () => {
     },
   ]);
 
+  const [activeCard, setActiveCard] = useState('');
+
+  const navigate = useNavigate();
+
+  const takeASleep = (delay) =>
+    new Promise((resolve) => setTimeout(resolve, delay));
+
+  const wait = async () => {
+    //wait, takeAsleep은 지연 이벤트를 동기적으로 처리해주기 위한 함수
+    await takeASleep(300);
+  };
+
+  const handleCardClick = async (id) => {
+    setActiveCard(id);
+    await wait();
+    navigate('./recommendingPage');
+  };
+
   const sortBySimilarity = () => {
     const sortedData = [...data].sort((a, b) => {
       const similarityA = parseFloat(a.similarity.replace(/\D/g, ''));
@@ -85,10 +103,10 @@ const ResultPage = () => {
   return (
     <div className="flex flex-col">
       <Box
+        className="mr-1 mb-2"
         sx={{
           display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
+          justifyContent: 'flex-end',
           '& > *': {
             m: 1,
           },
@@ -123,7 +141,12 @@ const ResultPage = () => {
       </Box>
       <div className="flex flex-wrap justify-center gap-4">
         {data.map((item, index) => (
-          <Card key={index} item={item} />
+          <Card
+            key={index}
+            item={item}
+            onClick={() => handleCardClick(index)} // 각 카드 클릭 이벤트 처리
+            isActive={activeCard === index} // 현재 카드가 클릭 상태인지 결정
+          />
         ))}
       </div>
     </div>
