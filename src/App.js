@@ -5,6 +5,7 @@ import PromptPage from './pages/PromptPage';
 import Join from './pages/Join';
 import SignInPage from './pages/SignInPage/signInPage';
 import LandingPage from './pages/LandingPage/landingPage';
+import SplashScreen from './pages/SplashScreen/splashScreen';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/" element={<OnboardingPage />} />
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/landing" element={<LandingPage />} />
+        <Route path="/Splash" element={<SplashScreen />} />
       </Routes>
     </div>
   );
