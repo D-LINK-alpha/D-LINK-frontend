@@ -6,8 +6,10 @@ import Join from './pages/Join';
 import SignInPage from './pages/SignInPage/signInPage';
 import ResultPage from './pages/ResultPage/resultPage';
 import LandingPage from './pages/LandingPage/landingPage';
+import SplashScreen from './pages/SplashScreen/splashScreen';
 import LoadingPage from './pages/LoadingPage/loadingPage';
 import CommunityPage from './pages/CommunityPage/index';
+
 
 const App = () => {
   return (
@@ -19,6 +21,7 @@ const App = () => {
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/result" element={<ResultPage />} />
         <Route path="/landing" element={<LandingPage />} />
+        <Route path="/splash" element={<SplashScreen />} />
         <Route path="/loading" element={<LoadingPage />} />
         <Route path="/community" element={<CommunityPage />} />
       </Routes>
