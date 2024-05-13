@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-// import { ReactComponent as ResultPic } from '../../assets/resultpic.svg';
 import { Button } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Card from '../../components/card';
 import Box from '@mui/material/Box';
-import Layout from '../../components/Layout/Layout';
+import { useNavigate } from 'react-router-dom';
 
 const ResultPage = () => {
   const [data, setData] = useState([
@@ -52,6 +51,24 @@ const ResultPage = () => {
     },
   ]);
 
+  const [activeCard, setActiveCard] = useState('');
+
+  const navigate = useNavigate();
+
+  const takeASleep = (delay) =>
+    new Promise((resolve) => setTimeout(resolve, delay));
+
+  const wait = async () => {
+    //wait, takeAsleep은 지연 이벤트를 동기적으로 처리해주기 위한 함수
+    await takeASleep(300);
+  };
+
+  const handleCardClick = async (id) => {
+    setActiveCard(id);
+    await wait();
+    navigate('./recommendingPage');
+  };
+
   const sortBySimilarity = () => {
     const sortedData = [...data].sort((a, b) => {
       const similarityA = parseFloat(a.similarity.replace(/\D/g, ''));
@@ -84,52 +101,55 @@ const ResultPage = () => {
     sortByPrice();
   };
   return (
-    <Layout>
-      <div className="flex flex-col">
-        <Box
+    <div className="flex flex-col">
+      <Box
+        className="mr-1 mb-2"
+        sx={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          '& > *': {
+            m: 1,
+          },
+        }}
+      >
+        <ButtonGroup
+          variant="text"
+          color="primary"
+          aria-label="small button group"
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            '& > *': {
-              m: 1,
+            borderColor: '#FFFFFF', // 버튼 그룹의 구분선 색상 변경
+            '& .MuiButtonGroup-grouped': {
+              borderColor: '#FFFFFF', // 개별 버튼 간의 선의 색상을 변경
             },
           }}
         >
-          <ButtonGroup
-            variant="text"
-            color="primary"
-            aria-label="small button group"
-            sx={{
-              borderColor: '#FFFFFF', // 버튼 그룹의 구분선 색상 변경
-              '& .MuiButtonGroup-grouped': {
-                borderColor: '#FFFFFF', // 개별 버튼 간의 선의 색상을 변경
-              },
-            }}
+          <Button
+            style={{ color: priceButtonStyle }}
+            size="small"
+            onClick={handlePriceButtonClick}
           >
-            <Button
-              style={{ color: priceButtonStyle }}
-              size="small"
-              onClick={handlePriceButtonClick}
-            >
-              가격순
-            </Button>
-            <Button
-              style={{ color: simButtonStyle }}
-              size="small"
-              onClick={handleSimButtonClick}
-            >
-              취향일치순
-            </Button>
-          </ButtonGroup>
-        </Box>
-        <div className="flex flex-wrap justify-center gap-4">
-          {data.map((item, index) => (
-            <Card key={index} item={item} />
-          ))}
-        </div>
+            가격순
+          </Button>
+          <Button
+            style={{ color: simButtonStyle }}
+            size="small"
+            onClick={handleSimButtonClick}
+          >
+            취향일치순
+          </Button>
+        </ButtonGroup>
+      </Box>
+      <div className="flex flex-wrap justify-center gap-4">
+        {data.map((item, index) => (
+          <Card
+            key={index}
+            item={item}
+            onClick={() => handleCardClick(index)} // 각 카드 클릭 이벤트 처리
+            isActive={activeCard === index} // 현재 카드가 클릭 상태인지 결정
+          />
+        ))}
       </div>
-    </Layout>
+    </div>
   );
 };
 

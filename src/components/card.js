@@ -1,10 +1,16 @@
 import { PropTypes } from 'prop-types';
 import { ReactComponent as ResultSample } from '../assets/resultSample.svg';
 
-const Card = ({ item }) => {
+const Card = ({ item, onClick, isActive }) => {
+  const borderColor = isActive ? 'border-zinc-100' : 'border-neutral-500';
   return (
-    <div className="grid grid-cols-1 w-full h-full max-w-40 place-items-center">
-      <div className="border border-gray-200 rounded-3xl max-w-40 max-h-60 w-full">
+    <div
+      className="grid grid-cols-1 w-full h-full max-w-40 place-items-center"
+      onClick={onClick}
+    >
+      <div
+        className={`border ${borderColor} bg-neutral-700 rounded-3xl max-w-40 max-h-60 w-full`}
+      >
         <span className="text-white text-4xl flex justify-start pl-4 pt-6">
           {item.similarity}
         </span>
@@ -22,7 +28,6 @@ const Card = ({ item }) => {
           </div>
         </div>
         <div className="grid place-items-center">
-          {/*<ResultPic />*/}
           <ResultSample />
         </div>
       </div>
@@ -37,6 +42,8 @@ Card.propTypes = {
     cafe: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
   }).isRequired,
+  onClick: PropTypes.func.isRequired,
+  isActive: PropTypes.bool.isRequired,
 };
 
 export default Card;
