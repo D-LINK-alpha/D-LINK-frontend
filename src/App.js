@@ -10,11 +10,11 @@ import SplashScreen from './pages/SplashScreen/splashScreen';
 import LoadingPage from './pages/LoadingPage/loadingPage';
 import CommunityPage from './pages/CommunityPage/index';
 
-
 const App = () => {
   return (
     <div className="App">
       <Routes>
+        <Route path="/login/oauth2/callback/kakao" element={<LoadingPage />} />
         <Route path="/prompt" element={<PromptPage />} />
         <Route path="/join" element={<Join />} />
         <Route path="/" element={<OnboardingPage />} />
