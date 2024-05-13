@@ -14,12 +14,10 @@ const PromptPage = () => {
     }
   };
 
-  // const title = 'prompt';
-
   return (
     <>
       <Header title="prompt" />
-      <div className="flex flex-col h-screen px-7 py-[64px]">
+      <div className="Container">
         <div className="flex-1">
           <div className="flex justify-center mt-8">
             <InputSample />

@@ -49,3 +49,9 @@
 
 }
 
+@layer components {
+    .Container {
+        @apply flex flex-col h-screen px-7 py-[64px]
+    }
+}
+
