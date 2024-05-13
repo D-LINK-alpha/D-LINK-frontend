@@ -18,7 +18,7 @@ export default function LabelBottomNavigation() {
   };
 
   return (
-    <div>
+    <div className="absolute bottom-0 w-[100%]">
       <BottomNavigation
         value={value}
         onChange={handleChange}
@@ -53,7 +53,7 @@ export default function LabelBottomNavigation() {
           label="Main"
           value="main"
           component={Link}
-          to="/"
+          to="/landing"
           icon={<DrinkIcon />}
           sx={{ minWidth: 'unset' }}
         />

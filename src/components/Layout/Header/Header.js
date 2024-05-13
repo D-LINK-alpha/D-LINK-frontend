@@ -6,17 +6,23 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PropTypes from 'prop-types';
-import { ReactComponent as BackIcon } from '../../assets/back.svg';
-import { ReactComponent as AlarmIcon } from '../../assets/alarm.svg';
+import { ReactComponent as BackIcon } from '../../../assets/back.svg';
+import { ReactComponent as AlarmIcon } from '../../../assets/alarm.svg';
+import { useNavigate } from 'react-router-dom';
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
 };
 
 export default function Header({ title }) {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1); // 이전 화면으로 이동
+  };
+
   return (
-    // <Box sx={{ flexGrow: 1 }}>
-    <Box>
+    <Box className="absolute top-0 w-[100%]">
       <AppBar position="static" sx={{ backgroundColor: '#232322' }}>
         <Toolbar>
           <IconButton
@@ -25,6 +31,7 @@ export default function Header({ title }) {
             color="main"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={goBack} // 클릭 시 뒤로가기 함수 실행
           >
             <BackIcon />
           </IconButton>
