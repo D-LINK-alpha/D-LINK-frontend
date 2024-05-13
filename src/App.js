@@ -6,6 +6,8 @@ import Join from './pages/Join';
 import SignInPage from './pages/SignInPage/signInPage';
 import LandingPage from './pages/LandingPage/landingPage';
 import SplashScreen from './pages/SplashScreen/splashScreen';
+import LoadingPage from './pages/LoadingPage/loadingPage';
+
 
 
 const App = () => {
@@ -18,6 +20,7 @@ const App = () => {
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/splash" element={<SplashScreen />} />
+        <Route path="/loading" element={<LoadingPage />} />
       </Routes>
     </div>
   );
