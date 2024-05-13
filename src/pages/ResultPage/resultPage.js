@@ -4,6 +4,7 @@ import { Button } from '@mui/material';
 import ButtonGroup from '@mui/material/ButtonGroup';
 import Card from '../../components/card';
 import Box from '@mui/material/Box';
+import Layout from '../../components/Layout/Layout';
 
 const ResultPage = () => {
   const [data, setData] = useState([
@@ -83,50 +84,52 @@ const ResultPage = () => {
     sortByPrice();
   };
   return (
-    <div className="flex flex-col">
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          '& > *': {
-            m: 1,
-          },
-        }}
-      >
-        <ButtonGroup
-          variant="text"
-          color="primary"
-          aria-label="small button group"
+    <Layout>
+      <div className="flex flex-col">
+        <Box
           sx={{
-            borderColor: '#FFFFFF', // 버튼 그룹의 구분선 색상 변경
-            '& .MuiButtonGroup-grouped': {
-              borderColor: '#FFFFFF', // 개별 버튼 간의 선의 색상을 변경
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            '& > *': {
+              m: 1,
             },
           }}
         >
-          <Button
-            style={{ color: priceButtonStyle }}
-            size="small"
-            onClick={handlePriceButtonClick}
+          <ButtonGroup
+            variant="text"
+            color="primary"
+            aria-label="small button group"
+            sx={{
+              borderColor: '#FFFFFF', // 버튼 그룹의 구분선 색상 변경
+              '& .MuiButtonGroup-grouped': {
+                borderColor: '#FFFFFF', // 개별 버튼 간의 선의 색상을 변경
+              },
+            }}
           >
-            가격순
-          </Button>
-          <Button
-            style={{ color: simButtonStyle }}
-            size="small"
-            onClick={handleSimButtonClick}
-          >
-            취향일치순
-          </Button>
-        </ButtonGroup>
-      </Box>
-      <div className="flex flex-wrap justify-center gap-4">
-        {data.map((item, index) => (
-          <Card key={index} item={item} />
-        ))}
+            <Button
+              style={{ color: priceButtonStyle }}
+              size="small"
+              onClick={handlePriceButtonClick}
+            >
+              가격순
+            </Button>
+            <Button
+              style={{ color: simButtonStyle }}
+              size="small"
+              onClick={handleSimButtonClick}
+            >
+              취향일치순
+            </Button>
+          </ButtonGroup>
+        </Box>
+        <div className="flex flex-wrap justify-center gap-4">
+          {data.map((item, index) => (
+            <Card key={index} item={item} />
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
