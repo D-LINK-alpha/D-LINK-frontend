@@ -17,7 +17,7 @@ const App = () => {
         <Route path="/" element={<OnboardingPage />} />
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/landing" element={<LandingPage />} />
-        <Route path="/Splash" element={<SplashScreen />} />
+        <Route path="/splash" element={<SplashScreen />} />
       </Routes>
     </div>
   );
