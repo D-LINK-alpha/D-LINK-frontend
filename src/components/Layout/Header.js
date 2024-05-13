@@ -6,8 +6,8 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import PropTypes from 'prop-types';
-import { ReactComponent as BackIcon } from '../../../assets/back.svg';
-import { ReactComponent as AlarmIcon } from '../../../assets/alarm.svg';
+import { ReactComponent as BackIcon } from '../../assets/back.svg';
+import { ReactComponent as AlarmIcon } from '../../assets/alarm.svg';
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,

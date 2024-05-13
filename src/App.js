@@ -4,9 +4,9 @@ import OnboardingPage from './pages/OnboardingPage';
 import PromptPage from './pages/PromptPage';
 import Join from './pages/Join';
 import SignInPage from './pages/SignInPage/signInPage';
+import ResultPage from './pages/ResultPage/resultPage';
 import LandingPage from './pages/LandingPage/landingPage';
 import LoadingPage from './pages/LoadingPage/loadingPage';
-
 
 const App = () => {
   return (
@@ -16,6 +16,7 @@ const App = () => {
         <Route path="/join" element={<Join />} />
         <Route path="/" element={<OnboardingPage />} />
         <Route path="/signIn" element={<SignInPage />} />
+        <Route path="/result" element={<ResultPage />} />
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/loading" element={<LoadingPage />} />
       </Routes>
