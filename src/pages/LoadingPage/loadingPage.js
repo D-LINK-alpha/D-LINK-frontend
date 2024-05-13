@@ -11,25 +11,28 @@ const LoadingPage = () => {
   const code = new URL(window.location.href).searchParams.get('code');
 
   //인가코드 백으로 보내는 코드
+
+  const kakaoLogin = async () => {
+    await axios({
+      method: 'GET',
+      // url: `${process.env.REACT_APP_REDIRECT_URL}/?code=${code}`,
+      url: `http://43.203.240.185:8080/login/oauth2/code/kakao?code=${code}`,
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8', //json 형태로 데이터 전송
+        'Access-Control-Allow-Origin': '*', // cors 에러
+      },
+    }).then((res) => {
+      // 백엔드에 전달 완료했을 때
+      console.log(res);
+      //로그인이 성공하면 이동할 페이지
+      navigate('/landing');
+    });
+  };
+
   useEffect(() => {
-    const kakaoLogin = async () => {
-      await axios({
-        method: 'GET',
-        url: `${process.env.REACT_APP_REDIRECT_URL}/?code=${code}`,
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8', //json 형태로 데이터 전송
-          'Access-Control-Allow-Origin': '*', // cors 에러
-        },
-      }).then((res) => {
-        //백에서 완료후 우리사이트 전용 토큰 넘겨주는게 성공했다면
-        console.log(res);
-        // //계속 쓸 정보들( ex: 이름) 등은 localStorage에 저장해두자
-        // localStorage.setItem('name', res.data.account.kakaoName);
-        //로그인이 성공하면 이동할 페이지
-        navigate('/landing');
-      });
-    };
-    kakaoLogin();
+    setTimeout(() => {
+      kakaoLogin();
+    }, 1000);
   }, []);
 
   return (
