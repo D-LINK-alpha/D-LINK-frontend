@@ -27,11 +27,11 @@ const OnboardingPage = () => {
           />
         </Link>
       </div>
-      <div className="pt-5 text-gray-color underline">
-        <Link to="/join">
-          <p>새로운 계정 만들기</p>
-        </Link>
-      </div>
+      {/*<div className="pt-5 text-gray-color underline">*/}
+      {/*  <Link to="/join">*/}
+      {/*    <p>새로운 계정 만들기</p>*/}
+      {/*  </Link>*/}
+      {/*</div>*/}
     </div>
   );
 };

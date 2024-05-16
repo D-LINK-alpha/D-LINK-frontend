@@ -11,28 +11,30 @@ const LoadingPage = () => {
   const code = new URL(window.location.href).searchParams.get('code');
 
   //인가코드 백으로 보내는 코드
-
   const kakaoLogin = async () => {
+    console.log(code);
     await axios({
       method: 'GET',
       // url: `${process.env.REACT_APP_REDIRECT_URL}/?code=${code}`,
-      url: `http://43.203.240.185:8080/login/oauth2/code/kakao?code=${code}`,
+      url: `http://13.209.173.203:8080/login/oauth2/code/kakao?code=${code}`,
       headers: {
         'Content-Type': 'application/json;charset=utf-8', //json 형태로 데이터 전송
         'Access-Control-Allow-Origin': '*', // cors 에러
       },
     }).then((res) => {
       // 백엔드에 전달 완료했을 때
-      console.log(res);
-      //로그인이 성공하면 이동할 페이지
-      navigate('/landing');
+      // console.log(JSON.stringify(res.data));
+      sessionStorage.setItem('token', res.data.token);
+      console.log(res.data.token);
+      // 인증 성공 시 회원 가입 페이지로 이동
+      navigate('/join');
     });
   };
 
   useEffect(() => {
     setTimeout(() => {
       kakaoLogin();
-    }, 1000);
+    }, 500);
   }, []);
 
   return (

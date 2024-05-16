@@ -18,7 +18,10 @@ const SignInPage = () => {
       </a>
       <div className="text-[#868686] text-sm pt-[22px]">
         DLNK가 처음이신가요?
-        <a href={'/join'} className="text-[#DBDBDB] underline pl-2 text-sm">
+        <a
+          href={KAKAO_AUTH_URL}
+          className="text-[#DBDBDB] underline pl-2 text-sm"
+        >
           회원가입
         </a>
       </div>

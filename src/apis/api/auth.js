@@ -3,3 +3,6 @@ const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URL;
 
 export const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 // export const KAKAO_AUTH_URL = `http://localhost:3000/login/callback?code={code}`;
+
+// export const KAKAO_AUTH_URL =
+//   'http://13.209.173.203:8080/oauth2/authorization/kakao';
