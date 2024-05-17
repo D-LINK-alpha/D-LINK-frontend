@@ -1,6 +1,7 @@
 import * as React from 'react';
 import MuiButton from '../../components/Button/muiButton';
 import { ReactComponent as OnboardingImage } from '../../assets/Group 36.svg';
+import { Link } from 'react-router-dom';
 
 const OnboardingPage = () => {
   return (
@@ -19,13 +20,17 @@ const OnboardingPage = () => {
         </p>
       </div>
       <div className="flex justify-center pt-10">
-        <MuiButton
-          text="시작하기"
-          className="w-44 h-12 rounded-3xl bg-[#3FCC7C] text-lg"
-        />
+        <Link to="/signin">
+          <MuiButton
+            text="시작하기"
+            className="w-44 h-12 rounded-3xl bg-[#3FCC7C] text-lg"
+          />
+        </Link>
       </div>
-      <div className="pt-5 text-gray-color">
-        <p>새로운 계정 만들기</p>
+      <div className="pt-5 text-gray-color underline">
+        <Link to="/join">
+          <p>새로운 계정 만들기</p>
+        </Link>
       </div>
     </div>
   );

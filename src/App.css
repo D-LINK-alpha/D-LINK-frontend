@@ -29,7 +29,7 @@
 #root {
   display: flex;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .App {
@@ -46,4 +46,12 @@
     text-align: center;
     overflow: scroll;
     border: 1px solid #EDEDED;
+
 }
+
+@layer components {
+    .Container {
+        @apply flex flex-col h-screen px-7 py-[64px]
+    }
+}
+
