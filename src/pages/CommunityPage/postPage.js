@@ -11,7 +11,6 @@ export default function postPage() {
         <div className="overflow-auto scrollbar-hide">
           <div className="flex space-x-0 justify-between pt-4 px-[23px] pb-8">
             <p className="text-amber-50 text-2xl">Post</p>
-            <div className="flex justify-end"></div>
           </div>
 
           <div className="w-full flex-col space-x-0 justify-center items-center bg-[#363636]">

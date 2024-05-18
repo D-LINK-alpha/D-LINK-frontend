@@ -11,6 +11,7 @@ import LoadingPage from './pages/LoadingPage/loadingPage';
 import CommunityPage from './pages/CommunityPage/index';
 import UploadPage from './pages/CommunityPage/uploadPage';
 import PostPage from './pages/CommunityPage/postPage';
+import SettingsPage from './pages/SettingsPage/index';
 
 const App = () => {
   return (
@@ -30,6 +31,8 @@ const App = () => {
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/community/upload" element={<UploadPage />} />
         <Route path="/community/post" element={<PostPage />} />
+
+        <Route path="/settings" element={<SettingsPage />} />
       </Routes>
     </div>
   );
