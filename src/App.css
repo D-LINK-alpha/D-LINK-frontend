@@ -46,12 +46,22 @@
     text-align: center;
     overflow: scroll;
     border: 1px solid #EDEDED;
+}
 
+.App::-webkit-scrollbar{
+    display: none;
 }
 
 @layer components {
     .Container {
-        @apply flex flex-col h-screen px-7 py-[64px]
+        @apply flex flex-col h-screen px-[23px] py-[64px]
     }
 }
+
+/*community 에서 이미지의 scroll bar 없애기 위한 커스텀 css*/
+.MuiBox-root.css-176kmp3::-webkit-scrollbar{
+    display: none;
+}
+
+
 
