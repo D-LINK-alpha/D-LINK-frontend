@@ -9,7 +9,8 @@ import LandingPage from './pages/LandingPage/landingPage';
 import SplashScreen from './pages/SplashScreen/splashScreen';
 import LoadingPage from './pages/LoadingPage/loadingPage';
 import CommunityPage from './pages/CommunityPage/index';
-
+import UploadPage from './pages/CommunityPage/uploadPage';
+import PostPage from './pages/CommunityPage/postPage';
 
 const App = () => {
   return (
@@ -23,7 +24,10 @@ const App = () => {
         <Route path="/landing" element={<LandingPage />} />
         <Route path="/splash" element={<SplashScreen />} />
         <Route path="/loading" element={<LoadingPage />} />
+
         <Route path="/community" element={<CommunityPage />} />
+        <Route path="/community/upload" element={<UploadPage />} />
+        <Route path="/community/post" element={<PostPage />} />
       </Routes>
     </div>
   );

@@ -1,42 +1,57 @@
 import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
-import { Button } from '@mui/material';
+// import { Button } from '@mui/material';
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import { ReactComponent as DrinkSample } from '../../assets/drinkExample/drinkExample.svg';
+import MuiButton from '../../components/Button/muiButton';
+import { Link } from 'react-router-dom';
 
 export default function CommunityPage() {
   return (
     <div>
       <Header title="Share Your DLNK" />
-      <div className="Container">
-        <div className="flex space-x-0 justify-between pt-4">
-          <p className="text-amber-50 text-2xl">Community</p>
-          <div className="flex justify-end">
-            <Button className="w-16 h-8 bg-[#EDEDED] text-black rounded-3xl">
-              +
-            </Button>
+      <div className="flex flex-col h-screen py-[64px]">
+        <div className="overflow-auto scrollbar-hide">
+          <div className="flex space-x-0 justify-between pt-4 px-[23px] pb-8">
+            <p className="text-amber-50 text-2xl">Community</p>
+            <div className="flex justify-end">
+              <Link to="/community/upload">
+                <MuiButton
+                  text="+"
+                  className="w-16 h-8 bg-[#363636] text-amber-50 rounded-3xl"
+                />
+              </Link>
+            </div>
           </div>
-        </div>
 
-        <div></div>
+          <div className="w-full h-[468px] flex-col space-x-0 justify-center items-center bg-[#363636]">
+            <div className="flex px-[23px]">
+              <p className="text-xl text-amber-50 py-[18px]">오늘의 꿀조합</p>
+            </div>
+            <div className="flex justify-center">
+              <DrinkSample />
+            </div>
+          </div>
 
-        <div className="overflow-auto">
-          <Box sx={{ width: 320, overflowY: 'scroll' }}>
-            <ImageList variant="masonry" cols={2} gap={8}>
-              {itemData.map((item) => (
-                <ImageListItem key={item.img}>
-                  <img
-                    srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-                    src={`${item.img}?w=248&fit=crop&auto=format`}
-                    alt={item.title}
-                    loading="lazy"
-                  />
-                </ImageListItem>
-              ))}
-            </ImageList>
-          </Box>
+          <div className="px-[23px] flex justify-center pt-[81px]">
+            <Box sx={{ width: 320, overflowY: 'scroll' }}>
+              <ImageList variant="masonry" cols={2} gap={8}>
+                {itemData.map((item) => (
+                  <ImageListItem key={item.img}>
+                    <img
+                      srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+                      src={`${item.img}?w=248&fit=crop&auto=format`}
+                      alt={item.title}
+                      loading="lazy"
+                    />
+                  </ImageListItem>
+                ))}
+              </ImageList>
+            </Box>
+          </div>
         </div>
       </div>
       <Footer />
