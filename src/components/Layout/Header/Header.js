@@ -23,8 +23,11 @@ export default function Header({ title }) {
 
   return (
     <Box className="absolute top-0 w-[100%]">
-      <AppBar position="static" sx={{ backgroundColor: '#232322' }}>
-        <Toolbar>
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: '#232322', boxShadow: 'none', height: '75px' }}
+      >
+        <Toolbar sx={{ height: '75px' }}>
           <IconButton
             size="large"
             edge="start"
