@@ -26,7 +26,7 @@ const Modal = ({ isOpen, name }) => {
           <a href={'/prompt'} className="flex justify-center items-center bg-[#DF5A21] w-[111px] h-[37px] rounded-full text-white text-[14px] font-semibold mt-[27px]">상황 입력하기</a>
         </div>
         <div className="flex text-[10px] pt-[25px] space-x-[71px]">
-          <Link to="/" className="flex">
+          <Link to="/history" className="flex">
             <HistoryIcon className="mr-[7px]"/>
             추천 히스토리 보기
           </Link>

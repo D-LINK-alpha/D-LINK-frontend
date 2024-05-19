@@ -9,6 +9,7 @@ import LandingPage from './pages/LandingPage/landingPage';
 import SplashScreen from './pages/SplashScreen/splashScreen';
 import LoadingPage from './pages/LoadingPage/loadingPage';
 import CommunityPage from './pages/CommunityPage/index';
+import HistoryPage from './pages/HistoryPage/historyPage';
 
 const App = () => {
   return (
@@ -24,6 +25,7 @@ const App = () => {
         <Route path="/splash" element={<SplashScreen />} />
         <Route path="/loading" element={<LoadingPage />} />
         <Route path="/community" element={<CommunityPage />} />
+        <Route path="/history" element={<HistoryPage />} />
       </Routes>
     </div>
   );

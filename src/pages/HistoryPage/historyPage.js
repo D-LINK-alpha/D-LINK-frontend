@@ -1,7 +1,11 @@
 import React from 'react';
-import Header from '../../components/Layout/Header';
+import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
 import { ReactComponent as BackIcon } from '../../assets/back.svg';
+// import { ReactComponent as RedIcon } from '../../assets/miniRed.svg';
+// import { ReactComponent as GreenIcon } from '../../assets/miniGreen.svg';
+// import { ReactComponent as BlueIcon } from '../../assets/miniBlue.svg';
+// import { ReactComponent as YellowIcon } from '../../assets/miniYellow.svg';
 
 
 const HistoryPage = () => {
@@ -12,7 +16,7 @@ const HistoryPage = () => {
   return (
     <div className="flex flex-col h-screen">
       <Header title="History" />
-      <div className="flex-1">
+      <div className="flex-1 mt-[64px]">
         <div className="flex flex-col w-[375px] h-[108px] bg-[#363636] pt-[24px]">
           <div className="flex justify-center items-center">
             <BackIcon className="w-[8px] h-[11px] mr-[20px]"/>
