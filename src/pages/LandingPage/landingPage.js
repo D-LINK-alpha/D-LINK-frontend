@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Item from '../../components/Item/item';
 import InfoBar from '../../components/Layout/Header/infoBar';
+import Footer from '../../components/Layout/Footer';
 import Modal from '../../components/Modal/modal';
 
 const LandingPage = () => {
@@ -20,15 +21,17 @@ const LandingPage = () => {
   }, [dummyData]);
 
   return (
-    <div className="flex flex-col">
+    <>
       <InfoBar name={'쿠민'} />
+      <div className="flex flex-col h-screen pb-[64px]">
+        <div className="flex-1">
       <div className="flex items-end text-white text-[24px] pt-[18px] pl-[35px]">
         Today&apos;s DLNK
         <a href={'/'} className="text-[#DBDBDB] underline text-[12px] pb-[4px] pl-[100px]">
           더보기
         </a>
       </div>
-      <div className="flex flex-col justify-center pt-[22px] pl-[23px] pr-[23px]">
+      <div className="flex flex-col justify-center pt-[22px] px-[23px]">
         {dummyData.map((item, index) => (
           <Item
             key={index}
@@ -42,7 +45,10 @@ const LandingPage = () => {
         ))}
       </div>
       <Modal isOpen={isModalOpen} name={'쿠민'}/>
-    </div>
+      </div>
+      </div>
+      <Footer/>
+    </>
   );
 };
 
