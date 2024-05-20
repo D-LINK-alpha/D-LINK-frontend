@@ -69,7 +69,7 @@ export default function LabelBottomNavigation() {
           label="Setting"
           value="setting"
           component={Link}
-          to="/setting"
+          to="/settings"
           icon={<SettingIcon />}
           sx={{ minWidth: 'unset' }}
         />
