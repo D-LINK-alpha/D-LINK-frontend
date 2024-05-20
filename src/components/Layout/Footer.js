@@ -37,7 +37,7 @@ export default function LabelBottomNavigation() {
           label="Home"
           // value="home"
           component={Link}
-          to="/"
+          to="/main"
           icon={<HomeIcon />}
           sx={{ minWidth: 'unset', color: '#ffffff' }}
         />
@@ -53,7 +53,7 @@ export default function LabelBottomNavigation() {
           label="Main"
           value="main"
           component={Link}
-          to="/landing"
+          to="/prompt"
           icon={<DrinkIcon />}
           sx={{ minWidth: 'unset' }}
         />
@@ -61,7 +61,7 @@ export default function LabelBottomNavigation() {
           label="MyPage"
           value="myPage"
           component={Link}
-          to="/mypage"
+          to="/history"
           icon={<MyPageIcon />}
           sx={{ minWidth: 'unset' }}
         />
@@ -69,7 +69,7 @@ export default function LabelBottomNavigation() {
           label="Setting"
           value="setting"
           component={Link}
-          to="/settings"
+          to="/setting"
           icon={<SettingIcon />}
           sx={{ minWidth: 'unset' }}
         />
