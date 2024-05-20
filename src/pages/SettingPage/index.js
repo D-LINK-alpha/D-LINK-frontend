@@ -19,12 +19,13 @@ export default function SettingPage() {
           <div className="flex bg-[#363636] h-[205px] justify-center">
             <div className="flex flex-col justify-center items-center">
               <div className="pb-[29px]">
-                <Profile />
+                <Profile size={82} />
               </div>
               <div className="flex pl-5">
                 <input
                   placeholder="닉네임"
-                  className="bg-transparent text-lg w-[98px] font-medium focus:outline-none border-b-[1px] border-solid border-b-white text-center"
+                  value="김쿠민"
+                  className="text-amber-50 bg-transparent text-lg w-[98px] font-medium focus:outline-none border-b-[1px] border-solid border-b-white text-center"
                 />
                 <div className="self-center">
                   <Pencil />
@@ -34,7 +35,7 @@ export default function SettingPage() {
           </div>
 
           <div className="flex space-x-0 pt-4 px-[35px]">
-            <p className="text-amber-50 text-2xl">Settings</p>
+            <p className="text-amber-50 text-2xl">Setting</p>
           </div>
 
           <div className="flex flex-col px-[23px] justify-between max-h-[440px] pt-[29px] gap-6">
