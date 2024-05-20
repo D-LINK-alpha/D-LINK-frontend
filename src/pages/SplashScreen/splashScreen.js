@@ -1,7 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { ReactComponent as SplashIcon } from "../../assets/splash.svg";
+import { useNavigate } from "react-router-dom";
 
-const LoadingPage = () => {
+const SplashScreen = () => {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate('/onboarding')
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [navigate]);
+
   return (
     <div className="flex flex-col justify-center items-center pt-[199px]">
       <SplashIcon/>
@@ -14,4 +24,4 @@ const LoadingPage = () => {
     </div>
   );
 };
-export default LoadingPage;
+export default SplashScreen;

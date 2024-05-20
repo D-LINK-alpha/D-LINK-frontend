@@ -6,12 +6,14 @@ import Join from './pages/Join';
 import SignInPage from './pages/SignInPage/signInPage';
 import ResultPage from './pages/ResultPage/resultPage';
 import LandingPage from './pages/LandingPage/landingPage';
+import RecommendingPage from './pages/RecommendingPage/recommendingPage';
 import SplashScreen from './pages/SplashScreen/splashScreen';
 import LoadingPage from './pages/LoadingPage/loadingPage';
 import CommunityPage from './pages/CommunityPage/index';
 import UploadPage from './pages/CommunityPage/uploadPage';
 import PostPage from './pages/CommunityPage/postPage';
 import SettingPage from './pages/SettingPage/index';
+
 
 const App = () => {
   return (
@@ -21,11 +23,13 @@ const App = () => {
         {/*<Route path="/auth/*" element={<LoadingPage />} />*/}
         <Route path="/prompt" element={<PromptPage />} />
         <Route path="/join" element={<Join />} />
-        <Route path="/" element={<OnboardingPage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/result" element={<ResultPage />} />
-        <Route path="/landing" element={<LandingPage />} />
-        <Route path="/splash" element={<SplashScreen />} />
+        <Route path="/main" element={<LandingPage />} />
+        <Route path="/" element={<SplashScreen />} />
+        <Route path="/result" element={<ResultPage />} />
+        <Route path="/result/recommendingPage" element={<RecommendingPage />} />
         <Route path="/loading" element={<LoadingPage />} />
 
         <Route path="/community" element={<CommunityPage />} />

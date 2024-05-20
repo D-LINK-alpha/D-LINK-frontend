@@ -54,7 +54,7 @@
 
 @layer components {
     .Container {
-        @apply flex flex-col h-screen px-[23px] pt-[75px] pb-[83px] overflow-auto
+        @apply flex flex-col h-screen px-[23px] pt-[75px] pb-[83px]
     }
 }
 
