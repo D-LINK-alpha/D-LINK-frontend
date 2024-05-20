@@ -17,6 +17,7 @@ const HistoryPage = () => {
     {drinkName: '쇼콜라 말차 모카', similarity:'80%', cafeName:'오설록', drinkType:'latte', isLike:false, createdAt: "2024-05-20T06:34:15.666Z"},
     {drinkName: '말차 초콜릿 라떼', similarity:'70%', cafeName:'오설록', drinkType:'latte', isLike:false, createdAt: "2024-05-20T06:34:15.666Z"},
     {drinkName: '밀크폼 그린티', similarity:'60%', cafeName:'오설록', drinkType:'tea', isLike:true, createdAt: "2024-05-19T06:34:15.666Z"},
+
   ];
 
   useEffect(() => {
@@ -50,8 +51,8 @@ const HistoryPage = () => {
     <div>
       <Header title="History" />
       <div className="flex flex-col h-screen py-[75px]">
-        <div className="flex-1">
-          <div className="flex flex-col w-[375px] h-[108px] bg-[#363636] pt-[24px]">
+        <div className="flex-1 overflow-y-scroll">
+          <div className="flex flex-col w-[375px] h-[108px] bg-[#363636] pt-[24px] sticky top-0">
             <div className="flex justify-center items-center">
               <button
                 onClick={() => moveDate(-1)}
@@ -76,7 +77,7 @@ const HistoryPage = () => {
               추천 히스토리는 일주일 전 기록까지만 확인이 가능해요.
             </div>
           </div>
-          <div className="flex flex-col px-[23px] pt-[32px]">
+          <div className="flex flex-col px-[23px] py-[32px]">
             {filteredData.map((item, index) => (
               <Item
                 key={index}
