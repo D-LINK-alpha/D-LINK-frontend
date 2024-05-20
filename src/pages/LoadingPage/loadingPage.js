@@ -34,7 +34,7 @@ const LoadingPage = () => {
       navigate('/join');
       // console.log(token);
     } else {
-      navigate('/landing');
+      navigate('/main');
     }
   };
 
