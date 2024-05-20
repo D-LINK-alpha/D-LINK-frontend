@@ -22,13 +22,13 @@ const App = () => {
         {/*<Route path="/auth/*" element={<LoadingPage />} />*/}
         <Route path="/prompt" element={<PromptPage />} />
         <Route path="/join" element={<Join />} />
-        <Route path="/" element={<OnboardingPage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/signIn" element={<SignInPage />} />
         <Route path="/result" element={<ResultPage />} />
-        <Route path="/landing" element={<LandingPage />} />
+        <Route path="/main" element={<LandingPage />} />
+        <Route path="/" element={<SplashScreen />} />
         <Route path="/result" element={<ResultPage />} />
         <Route path="/result/recommendingPage" element={<RecommendingPage />} />
-        <Route path="/splash" element={<SplashScreen />} />
         <Route path="/loading" element={<LoadingPage />} />
 
         <Route path="/community" element={<CommunityPage />} />
