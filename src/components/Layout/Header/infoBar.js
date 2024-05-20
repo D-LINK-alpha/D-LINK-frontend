@@ -14,7 +14,7 @@ InfoBar.propTypes = {
 
 export default function InfoBar({name}) {
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className="absolute w-[100%] top-0" >
       <AppBar position="static" sx={{ backgroundColor: '#232322' }} elevation={0}>
         <Toolbar>
           <IconButton
