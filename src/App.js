@@ -6,7 +6,6 @@ import Join from './pages/Join';
 import SignInPage from './pages/SignInPage/signInPage';
 import ResultPage from './pages/ResultPage/resultPage';
 import LandingPage from './pages/LandingPage/landingPage';
-import ResultPage from './pages/ResultPage/resultPage';
 import RecommendingPage from './pages/RecommendingPage/recommendingPage';
 import SplashScreen from './pages/SplashScreen/splashScreen';
 import LoadingPage from './pages/LoadingPage/loadingPage';
