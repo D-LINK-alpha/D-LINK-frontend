@@ -43,7 +43,7 @@ const LandingPage = () => {
   return (
     <>
       <InfoBar name={'쿠민'} />
-      <div className="flex flex-col h-screen pb-[64px]">
+      <div className="flex flex-col h-screen pb-[83px]">
         <div className="flex-1">
           <div className="flex items-end text-white text-[24px] pt-[18px] pl-[35px]">
             Today&apos;s DLNK
