@@ -58,6 +58,7 @@
     }
 }
 
+
 /*community 에서 이미지의 scroll bar 없애기 위한 커스텀 css*/
 .MuiBox-root.css-176kmp3::-webkit-scrollbar{
     display: none;
