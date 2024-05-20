@@ -28,7 +28,7 @@ export default function Join() {
       );
       if (res.data.msg === 'success') {
         sessionStorage.setItem('token', res.data.token);
-        navigate('/landing');
+        navigate('/main');
       } else {
         alert('회원 가입 실패');
       }
