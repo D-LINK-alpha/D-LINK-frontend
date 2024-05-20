@@ -7,14 +7,15 @@ import PropTypes from 'prop-types';
 MuiButton.propTypes = {
   text: PropTypes.string.isRequired,
   className: PropTypes.string, // CSS 클래스 prop 추가
+  onClick: PropTypes.func.isRequired,
 };
 
 // MuiButton 컴포넌트 선언
-export default function MuiButton({ text, className }) {
+export default function MuiButton({ text, className, onClick }) {
   // text를 props로 전달받음
   return (
     <Stack spacing={2} direction="row">
-      <Button variant="contained" className={className}>
+      <Button variant="contained" className={className} onClick={onClick}>
         {text}
       </Button>{' '}
       {/* 전달받은 text를 사용 */}
