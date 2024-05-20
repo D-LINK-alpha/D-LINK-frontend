@@ -6,11 +6,13 @@ import Join from './pages/Join';
 import SignInPage from './pages/SignInPage/signInPage';
 import ResultPage from './pages/ResultPage/resultPage';
 import LandingPage from './pages/LandingPage/landingPage';
+import RecommendingPage from './pages/RecommendingPage/recommendingPage';
 import SplashScreen from './pages/SplashScreen/splashScreen';
 import LoadingPage from './pages/LoadingPage/loadingPage';
 import CommunityPage from './pages/CommunityPage/index';
 import UploadPage from './pages/CommunityPage/uploadPage';
 import PostPage from './pages/CommunityPage/postPage';
+
 
 const App = () => {
   return (
@@ -25,6 +27,8 @@ const App = () => {
         <Route path="/result" element={<ResultPage />} />
         <Route path="/main" element={<LandingPage />} />
         <Route path="/" element={<SplashScreen />} />
+        <Route path="/result" element={<ResultPage />} />
+        <Route path="/result/recommendingPage" element={<RecommendingPage />} />
         <Route path="/loading" element={<LoadingPage />} />
 
         <Route path="/community" element={<CommunityPage />} />
