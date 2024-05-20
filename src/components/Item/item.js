@@ -72,7 +72,7 @@ Item.propTypes = {
   similarity: PropTypes.string.isRequired,
   cafeName: PropTypes.string.isRequired,
   drinkType: PropTypes.string.isRequired,
-  index: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
   size: PropTypes.string.isRequired,
 };
 
