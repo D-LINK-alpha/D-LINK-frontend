@@ -1,9 +1,26 @@
 import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
 import * as React from 'react';
-// import { Link } from 'react-router-dom';
+import Posting from '../../components/Posting/posting';
 
 export default function postPage() {
+  const dummyData = {
+    title: '그린티 라떼 더블샷',
+    user: '조다운',
+    content:
+      '할 게 왜ㅔ케 만아 카페인 너무 많아서 아이스티 먹고 싶어요 그럴 땐 아이스티를 먹어 봅시다',
+    isLike: true,
+    createdAt: '24/05/02',
+    imageSrcArray: [
+      'https://i.pinimg.com/564x/74/45/d3/7445d31462435646f07dd2f38b3693f4.jpg',
+      'https://i.pinimg.com/564x/66/43/d0/6643d0ee81eb7b18b775a09772cf075e.jpg',
+      'https://i.pinimg.com/736x/4d/d9/9e/4dd99ecab6f8083ad50add4ed540cef9.jpg',
+      'https://i.pinimg.com/736x/ea/0f/40/ea0f40b5dc5dc5f7e5d6937751b0ff09.jpg',
+    ],
+  };
+
+  // const post = dummyData[0]; // Access the first post in the array
+
   return (
     <div>
       <Header title="Share Your DLNK" />
@@ -13,19 +30,16 @@ export default function postPage() {
             <p className="text-amber-50 text-2xl">Post</p>
           </div>
 
-          <div className="w-full flex-col space-x-0 justify-center items-center bg-[#363636]">
-            <div className="flex px-[23px]">
-              <p className="text-sm text-amber-50 py-[18px]">제목 *</p>
-            </div>
-            <div className="flex px-[23px]">
-              <p className="text-sm text-amber-50 py-[18px]">사진 *</p>
-            </div>
-            <div className="flex px-[23px]">
-              <p className="text-sm text-amber-50 py-[18px]">게시글 본문 *</p>
-            </div>
+          <div>
+            <Posting
+              title={dummyData.title}
+              user={dummyData.user}
+              content={dummyData.content}
+              isLike={dummyData.isLike}
+              createdAt={dummyData.createdAt}
+              imageSrcArray={dummyData.imageSrcArray}
+            />
           </div>
-
-          <div className="px-[23px] flex justify-center pt-[81px]"></div>
         </div>
       </div>
       <Footer />
