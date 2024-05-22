@@ -1,33 +1,43 @@
 import React, { useState } from 'react';
 import MuiButton from '../../components/Button/muiButton';
 import { useNavigate } from 'react-router-dom';
-// import TextFields from '../../components/Input';
-// import checkException from '../../apis/utils/checkException';
 import axios from 'axios';
-const token = '3F4FD81F3934B66D7C7D64956EAF597F';
+import { useCookies } from 'react-cookie';
 
 export default function Join() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['email', 'Authorization']);
 
   const handleJoin = async () => {
-    console.log('되는 중');
+    const email = cookies.email;
+    // const token = cookies.Authorization;
+
+    console.log(email);
+
+    if (!email) {
+      alert('이메일을 찾을 수 없습니다.');
+      return;
+    }
+
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_REST_API_URL}/auth/join`,
         {
-          email: 'awhekdns@gmail.com',
+          email: email,
           nickname: name,
         },
         {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
           withCredentials: true,
         },
       );
       if (res.data.msg === 'success') {
-        sessionStorage.setItem('token', res.data.token);
+        let accessToken = res.headers['authorization'];
+        // const newToken = res.headers['authorization'];
+        console.log(accessToken);
+
+        // Save the token in a cookie
+        setCookie('Authorization', accessToken, { path: '/' });
         navigate('/main');
       } else {
         alert('회원 가입 실패');
