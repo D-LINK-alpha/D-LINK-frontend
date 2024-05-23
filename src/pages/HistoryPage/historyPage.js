@@ -11,12 +11,18 @@ const HistoryPage = () => {
   const week= ["일", "월", "화", "수", "목", "금", "토"];
   const canGoBack = date > new Date(Date.now() - 7 * (24 * 60 * 60 * 1000));
   const canGoForward = date < new Date().setHours(0, 0, 0, 0);
+  const likedItems = filteredData.filter(item => item.isLike);
+  const dislikedItems = filteredData.filter(item => !item.isLike);
+  const isEmpty = likedItems.length === 0 && dislikedItems.length === 0;
 
+
+  // isLike=='이걸로 할래요', bookmark=='즐겨찾기'
   const dummyData = [
-    {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'coffee', isLike:true, createdAt: "2024-05-20T06:34:15.666Z"},
-    {drinkName: '쇼콜라 말차 모카', similarity:'80%', cafeName:'오설록', drinkType:'latte', isLike:false, createdAt: "2024-05-20T06:34:15.666Z"},
-    {drinkName: '말차 초콜릿 라떼', similarity:'70%', cafeName:'오설록', drinkType:'latte', isLike:false, createdAt: "2024-05-20T06:34:15.666Z"},
-    {drinkName: '밀크폼 그린티', similarity:'60%', cafeName:'오설록', drinkType:'tea', isLike:true, createdAt: "2024-05-19T06:34:15.666Z"},
+    {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'coffee', isLike:true, bookmark:true, createdAt: "2024-05-22T06:34:15.666Z"},
+    {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'coffee', isLike:false, bookmark:true, createdAt: "2024-05-22T06:34:15.666Z"},
+    {drinkName: '쇼콜라 말차 모카', similarity:'80%', cafeName:'오설록', drinkType:'latte', isLike:false, bookmark:false, createdAt: "2024-05-22T06:34:15.666Z"},
+    {drinkName: '말차 초콜릿 라떼', similarity:'70%', cafeName:'오설록', drinkType:'latte', isLike:false, bookmark:true, createdAt: "2024-05-22T06:34:15.666Z"},
+    {drinkName: '밀크폼 그린티', similarity:'60%', cafeName:'오설록', drinkType:'tea', isLike:true, bookmark:true, createdAt: "2024-05-21T06:34:15.666Z"},
 
   ];
 
@@ -45,7 +51,6 @@ const HistoryPage = () => {
       return newDate;
     });
   };
-
 
   return (
     <div>
@@ -78,16 +83,38 @@ const HistoryPage = () => {
             </div>
           </div>
           <div className="flex flex-col px-[23px] py-[32px]">
-            {filteredData.map((item, index) => (
-              <Item
-                key={index}
-                drinkName={item.drinkName}
-                drinkType={item.drinkType}
-                isLike={item.isLike}
-              />
-            ))}
-            {filteredData.length === 0 && (
+            {isEmpty ? (
               <div className="text-white text-[16px] font-normal pt-[14px]">오늘 추천 받은 내역이 없어요.</div>
+            ) : (
+              <>
+                {likedItems.length > 0 && (
+                  <>
+                    {likedItems.map((item, index) => (
+                      <Item
+                        key={index}
+                        drinkName={item.drinkName}
+                        drinkType={item.drinkType}
+                        isLike={item.isLike}
+                        bookmark={item.bookmark}
+                      />
+                    ))}
+                  </>
+                )}
+                {dislikedItems.length > 0 && (
+                  <>
+                    <div className="text-white text-[16px] font-normal pt-[28px] pb-[16px]">즐겨찾기</div>
+                    {dislikedItems.map((item, index) => (
+                      <Item
+                        key={index}
+                        drinkName={item.drinkName}
+                        drinkType={item.drinkType}
+                        isLike={item.isLike}
+                        bookmark={item.bookmark}
+                      />
+                    ))}
+                  </>
+                )}
+              </>
             )}
           </div>
         </div>
