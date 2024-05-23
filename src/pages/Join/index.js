@@ -7,11 +7,10 @@ import { useCookies } from 'react-cookie';
 export default function Join() {
   const [name, setName] = useState('');
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['email', 'Authorization']);
+  const [cookies] = useCookies(['email']);
 
   const handleJoin = async () => {
     const email = cookies.email;
-    // const token = cookies.Authorization;
 
     console.log(email);
 
@@ -23,6 +22,7 @@ export default function Join() {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_REST_API_URL}/auth/join`,
+
         {
           email: email,
           nickname: name,
@@ -32,12 +32,6 @@ export default function Join() {
         },
       );
       if (res.data.msg === 'success') {
-        let accessToken = res.headers['authorization'];
-        // const newToken = res.headers['authorization'];
-        console.log(accessToken);
-
-        // Save the token in a cookie
-        setCookie('Authorization', accessToken, { path: '/' });
         navigate('/main');
       } else {
         alert('회원 가입 실패');
