@@ -100,6 +100,7 @@ const HistoryPage = () => {
                         cafeName={item.cafeName}
                         drinkType={item.drinkType}
                         isLike={item.isLike}
+                        bookmark={item.bookmark}
                       />
                     ))}
                   </div>
@@ -111,6 +112,8 @@ const HistoryPage = () => {
                       <Item
                         key={index}
                         drinkName={item.drinkName}
+                        similarity={item.similarity}
+                        cafeName={item.cafeName}
                         drinkType={item.drinkType}
                         isLike={item.isLike}
                         bookmark={item.bookmark}
