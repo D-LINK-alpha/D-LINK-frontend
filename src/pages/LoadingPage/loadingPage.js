@@ -1,40 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Spinner from '../../assets/loadingSpinner.gif';
 import { ReactComponent as GroupIcon } from '../../assets/iconGroup.svg';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-// import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 const LoadingPage = () => {
-  // 인가코드를 백엔드로 보냅니다.
   const navigate = useNavigate();
-  // const code = new URL(window.location.href).searchParams.get('code');
-  const judge = new URL(window.location.href).searchParams.get('sign_up');
+  const email = new URL(window.location.href).searchParams.get('email');
+  const token = new URL(window.location.href).searchParams.get('token');
+  const [, setCookie] = useCookies(['email', 'token']);
 
-  //인가코드 백으로 보내는 코드
   const kakaoLogin = () => {
-    // console.log(code);
-    // await axios({
-    //   method: 'GET',
-    //   // url: `${process.env.REACT_APP_REDIRECT_URL}/?code=${code}`,
-    //   url: `http://13.209.173.203:8080/login/oauth2/code/kakao?code=${code}`,
-    //   headers: {
-    //     'Content-Type': 'application/json;charset=utf-8', //json 형태로 데이터 전송
-    //     'Access-Control-Allow-Origin': '*', // cors 에러
-    //   },
-    // }).then((res) => {
-    //   // 백엔드에 전달 완료했을 때
-    //   // console.log(JSON.stringify(res.data));
-    //   localStorage.setItem('token', res.data.token);
-    //   console.log(res.data.token);
-    //   // 인증 성공 시 회원 가입 페이지로 이동
-    //   navigate('/join');
-    // });
-    if (judge === 'false') {
+    console.log(email);
+    console.log(token);
+    if (email) {
+      // 첫 로그인이라면
+      setCookie('email', email, { path: '/' });
       navigate('/join');
-      // console.log(token);
     } else {
+      // 첫 로그인이 아니라면
       navigate('/main');
+      setCookie('token', token, { path: '/' });
     }
   };
 
@@ -59,4 +45,5 @@ const LoadingPage = () => {
     </div>
   );
 };
+
 export default LoadingPage;
