@@ -58,7 +58,7 @@ const HistoryPage = () => {
       <Header title="History" />
       <div className="flex flex-col h-screen py-[75px]">
         <div className="flex-1 overflow-y-scroll">
-          <div className="flex flex-col w-[375px] h-[108px] bg-[#363636] pt-[24px] sticky top-0">
+          <div className="flex flex-col h-[108px] bg-[#363636] pt-[24px] sticky top-0">
             <div className="flex justify-center items-center">
               <button
                 onClick={() => moveDate(-1)}
