@@ -7,7 +7,7 @@ const SignInPage = () => {
   return (
     <div className="flex flex-col justify-center pt-[95px]">
       <div className="flex justify-center">
-        <GreenIcon />
+        <GreenIcon className="w-[198px] h-[204px]"/>
       </div>
       <div className="text-white text-lg pt-[47px]">
         간편하게 로그인하고 <br />
