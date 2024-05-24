@@ -1,26 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ReactComponent as RedIcon } from "../../assets/red.svg";
-import { ReactComponent as GreenIcon } from "../../assets/green_small.svg";
+import { ReactComponent as GreenIcon } from "../../assets/green.svg";
 import { ReactComponent as BlueIcon } from "../../assets/blue.svg";
 import { ReactComponent as YellowIcon } from "../../assets/yellow.svg";
 
 const Item = ({drinkName, similarity, cafeName, drinkType, index, size }) => {
   let iconComponent;
+  let iconSize;
 
   // 아이콘 설정
   switch (drinkType) {
     case 'coffee':
       iconComponent = <RedIcon />;
+      iconSize = 'w-[115px] h-[115px]';
       break;
     case 'latte':
       iconComponent = <BlueIcon />;
+      iconSize = 'w-[102px] h-[101px]';
       break;
     case 'ade':
       iconComponent = <YellowIcon />;
+      iconSize = 'w-[128px] h-[131px]';
       break;
     case 'tea':
       iconComponent = <GreenIcon />;
+      iconSize = 'w-[128px] h-[131px]';
       break;
     default:
       iconComponent = null;
@@ -40,7 +45,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, index, size }) => {
     <div className={`flex text-white ${bgColor[drinkType]} ${sizeClass}`}>
       {size === 'big' ? (
         <>
-          <div className='flex flex-col items-start w-[329px] h-[197px] pl-[28px]'>
+          <div className='flex flex-col items-start h-[197px] pl-[28px]'>
             <div className='text-[52px] pt-[21px]'>
               {similarity}
             </div>
@@ -51,7 +56,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, index, size }) => {
               {drinkName}
             </div>
           </div>
-          <div className='pl-[32px] pr-[19px] pb-[20px] content-end'>
+          <div className={`content-end ${iconSize}`}>
             {iconComponent}
           </div>
         </>
