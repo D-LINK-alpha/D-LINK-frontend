@@ -21,7 +21,7 @@ export default function CommunityPage() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_REST_API_URL}/article`,
+          `${process.env.REACT_APP_REST_API_URL}/api/article`,
         );
 
         const data = response.data.map((item) => ({

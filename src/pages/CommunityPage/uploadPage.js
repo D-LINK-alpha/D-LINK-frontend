@@ -54,7 +54,7 @@ export default function UploadPage() {
 
     try {
       const response = await axios.post(
-        `${process.env.REACT_APP_REST_API_URL}/article/create`,
+        `${process.env.REACT_APP_REST_API_URL}/api/article/create`,
         formData,
         {
           headers: {

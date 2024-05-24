@@ -21,7 +21,7 @@ export default function Join() {
 
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_REST_API_URL}/auth/join`,
+        `${process.env.REACT_APP_REST_API_URL}/api/auth/join`,
 
         {
           email: email,
