@@ -12,6 +12,8 @@
 /build
 yarn.lock
 .env
+#key files
+/cert
 
 # Logs
 logs
