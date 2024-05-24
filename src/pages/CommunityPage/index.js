@@ -73,7 +73,7 @@ export default function CommunityPage() {
             <Link to="/community/post">
               <div
                 className="flex justify-center cursor-pointer"
-                // onClick={(e) => e.stopPropagation()}
+                onClick={(e) => e.stopPropagation()}
               >
                 <DrinkSample />
               </div>
