@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import LoadingPage from '../LoadingPage/loadingPage';
+import PostLoadingPage from '../LoadingPage/postLoadingPage';
 
 export default function postPage() {
   const { postId } = useParams(); // useParams 훅을 사용하여 postId를 가져옴
@@ -46,7 +46,7 @@ export default function postPage() {
   }, [postId]); // postId가 변경될 때마다 fetchData를 호출
 
   if (!postData) {
-    return <LoadingPage />;
+    return <PostLoadingPage />;
     // return <div>loading...</div>;
   }
 
