@@ -6,16 +6,17 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
-import { ReactComponent as DrinkSample } from '../../assets/drinkExample/drinkExample.svg';
 import MuiButton from '../../components/Button/muiButton';
 import { Link } from 'react-router-dom';
 import ProfileIcon from '../../components/Profile/index';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { ReactComponent as DrinkSample } from '../../assets/drinkExample/drinkExample.svg';
 
 export default function CommunityPage() {
   const [isLatestClicked, setIsLatestClicked] = useState(true);
   const [itemData, setItemData] = useState([]);
+  const [topLikeItem, setTopLikeItem] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,13 +25,22 @@ export default function CommunityPage() {
           `${process.env.REACT_APP_REST_API_URL}/api/article`,
         );
 
-        const data = response.data.map((item) => ({
+        const data = response.data.map((item, index) => ({
+          postId: index + 1, // index를 기반으로 postId 추가
           img: item.files[0]?.url || '',
           title: item.title,
-          isLike: Math.floor(Math.random() * 10), // 임시로 랜덤 숫자를 좋아요 수로 사용
+          isLike: item.likes, // 실제 likes 값을 사용
         }));
+
         setItemData(data);
-        console.log(response.data.img);
+
+        // isLike 값이 가장 많은 항목 찾기
+        if (data.length > 0) {
+          const topItem = data.reduce((prev, current) =>
+            prev.isLike > current.isLike ? prev : current,
+          );
+          setTopLikeItem(topItem);
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -45,7 +55,7 @@ export default function CommunityPage() {
       return b.isLike - a.isLike;
     } else {
       // 인기순
-      return a.isLike - b.isLike;
+      return b.isLike - a.isLike;
     }
   });
 
@@ -70,14 +80,26 @@ export default function CommunityPage() {
             <div className="flex px-[23px]">
               <p className="text-xl text-amber-50 py-[18px]">오늘의 꿀조합</p>
             </div>
-            <Link to="/community/post">
-              <div
-                className="flex justify-center cursor-pointer"
-                onClick={(e) => e.stopPropagation()}
-              >
+            {topLikeItem && (
+              <Link to={`/community/post/${topLikeItem.postId}`}>
+                <div
+                  className="flex justify-center cursor-pointer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <img
+                    src={topLikeItem.img}
+                    alt={topLikeItem.title}
+                    className="object-cover w-full h-full"
+                    style={{ maxHeight: '329px', maxWidth: '329px' }}
+                  />
+                </div>
+              </Link>
+            )}
+            {!topLikeItem && (
+              <div className="flex justify-center cursor-pointer">
                 <DrinkSample />
               </div>
-            </Link>
+            )}
             <div className="flex pt-[18px]">
               <div className="pl-[35px]">
                 <ProfileIcon size={32} />
@@ -117,12 +139,14 @@ export default function CommunityPage() {
               <ImageList variant="masonry" cols={2} gap={8}>
                 {sortedItemData.map((item, index) => (
                   <ImageListItem key={index}>
-                    <img
-                      srcSet={`${item.img}`}
-                      src={`${item.img}`}
-                      alt={item.title}
-                      loading="lazy"
-                    />
+                    <Link to={`/community/post/${item.postId}`}>
+                      <img
+                        srcSet={`${item.img}`}
+                        src={`${item.img}`}
+                        alt={item.title}
+                        loading="lazy"
+                      />
+                    </Link>
                   </ImageListItem>
                 ))}
               </ImageList>

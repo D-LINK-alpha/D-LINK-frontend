@@ -8,11 +8,11 @@ import ProfileIcon from '../Profile';
 
 Posting.propTypes = {
   title: PropTypes.string.isRequired,
-  user: PropTypes.string.isRequired, // 수정: string으로 변경
+  user: PropTypes.string.isRequired,
   isLike: PropTypes.bool.isRequired,
-  setIsLike: PropTypes.func.isRequired, // 추가
+  setIsLike: PropTypes.func.isRequired,
   content: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired, // 수정: string으로 변경
+  createdAt: PropTypes.string.isRequired,
   imageSrcArray: PropTypes.arrayOf(PropTypes.string),
 };
 
@@ -29,13 +29,12 @@ export default function Posting({
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false, // 무한 반복을 일시적으로 비활성화
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
     dotsClass: 'dots_custom',
-    height: 375,
   };
 
   return (
@@ -44,7 +43,7 @@ export default function Posting({
         <div className="bg-[#363636]">
           <div className="flex pl-[35px] pr-8 justify-between">
             <p className="text-[10px] text-[#8E8E8E] pt-[22px]">{createdAt}</p>
-            <div onClick={onClick} className="self-end">
+            <div onClick={onClick} className="cursor-pointer self-end">
               {isLike ? <FullHeart /> : <Heart />}
             </div>
           </div>
@@ -63,7 +62,7 @@ export default function Posting({
         <div>
           <div className="flex justify-center">
             <div className="w-full h-full">
-              {imageSrcArray && (
+              {imageSrcArray && imageSrcArray.length > 0 && (
                 <Slider {...settings}>
                   {imageSrcArray.map((src, index) => (
                     <div key={index}>
@@ -80,7 +79,7 @@ export default function Posting({
           </div>
 
           <div className="px-[40px] flex text-start pt-[10px] pb-[32px]">
-            <p className="text-sm text-black  pb-[19px] font-medium break-words max-w-[296px]]">
+            <p className="text-sm text-black pb-[19px] font-medium break-words max-w-[296px]]">
               {content}
             </p>
           </div>
