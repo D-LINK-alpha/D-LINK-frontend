@@ -20,7 +20,6 @@ const HistoryPage = () => {
 
   const getHistory = async () => {
     const token = cookies.token;
-    console.log(token);
     try{
       const res = await axios.get(
         `${process.env.REACT_APP_REST_API_URL}/api/history`,
@@ -111,11 +110,13 @@ const HistoryPage = () => {
                       <Item
                         key={index}
                         drinkName={item.beverage.name}
-                        similarity={item.beverage.similarity}
+                        similarity={item.similarity}
                         cafeName={item.beverage.cafe}
                         drinkType={item.beverage.type}
                         isRecommended={item.isRecommended}
                         isLike={item.isLike}
+                        historyId={item.historyId}
+                        beverageId={item.beverage.id}
                       />
                     ))}
                   </div>
@@ -127,7 +128,7 @@ const HistoryPage = () => {
                       <Item
                         key={index}
                         drinkName={item.beverage.name}
-                        similarity={item.beverage.similarity}
+                        similarity={item.similarity}
                         cafeName={item.beverage.cafe}
                         drinkType={item.beverage.type}
                         isRecommended={item.isRecommended}

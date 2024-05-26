@@ -12,22 +12,22 @@ const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt }) =>
 
   // 아이콘 설정
   switch (drinkType) {
-    case 'coffee':
+    case 'COFFEE':
       iconComponent = <RedIcon />;
       iconSize = 'w-[120px] h-[120px]';
       iconPadding = 'pr-[16px] pb-[4px]';
       break;
-    case 'latte':
+    case 'LATTE':
       iconComponent = <BlueIcon />;
       iconSize = 'w-[102px] h-[101px]';
       iconPadding = 'pr-[24px] pb-[22px]';
       break;
-    case 'ade':
+    case 'ADE':
       iconComponent = <YellowIcon />;
       iconSize = 'w-[102px] h-[99px]';
       iconPadding = 'pr-[30px] pb-[25px]';
       break;
-    case 'tea':
+    case 'TEA':
       iconComponent = <GreenIcon />;
       iconSize = 'w-[128px] h-[131px]';
       iconPadding = 'pr-[13px] pb-[24px]';

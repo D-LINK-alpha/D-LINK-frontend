@@ -45,19 +45,19 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike
 
   // 아이콘 설정
   switch (drinkType) {
-    case 'coffee':
+    case 'COFFEE':
       iconComponent = isRecommended ? <BigRedIcon /> : <SmallRedIcon />;
       iconSize = 'w-[59px] h-[59px] ml-[9px] mr-[4px]';
       break
-    case 'latte':
+    case 'LATTE':
       iconComponent = isRecommended ? <BigBlueIcon /> : <SmallBlueIcon />;
       iconSize = 'w-[40px] h-[40px] ml-[19px] mr-[13px]';
       break;
-    case 'ade':
+    case 'ADE':
       iconComponent = isRecommended ? <BigYellowIcon /> : <SmallYellowIcon />;
       iconSize = 'w-[41px] h-[40px] ml-[19px] mr-[12px]';
       break;
-    case 'tea':
+    case 'TEA':
       iconComponent = isRecommended ? <BigGreenIcon /> : <SmallGreenIcon />;
       iconSize = 'w-[53px] h-[54px] ml-[15px] mr-[4px]';
       break;
