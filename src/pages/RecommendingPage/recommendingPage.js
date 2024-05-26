@@ -22,8 +22,6 @@ const RecommendingPage = () => {
 
   const recommend = async () => {
     const token = cookies.token;
-    console.log(clickedCardData.id);
-    console.log(clickedCardData.similarity)
     try{
       const res = await axios.post(
         `${process.env.REACT_APP_REST_API_URL}/api/history/recommend`,
@@ -37,17 +35,37 @@ const RecommendingPage = () => {
           }
         });
       if(res.data.msg === '이걸로 할래요 성공')
-        console.log(clickedCardData.id);
-        console.log(clickedCardData.similarity)
-        console.log('getHistory res:', res);
+        console.log('res:', res);
     }catch (error){
-      console.error('error!!', error);
+      console.error('recommend error!!', error);
+    }
+  };
+
+  const like = async () => {
+    const token = cookies.token;
+    try{
+      const res = await axios.post(
+        `${process.env.REACT_APP_REST_API_URL}/api/history/like`,
+        {
+          beverageId: clickedCardId+1,
+          historyId: 0 // 추후 수정
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      console.log(clickedCardData.id);
+      console.log('getHistory res:', res);
+    }catch (error){
+      console.error('like error!!', error);
     }
   };
 
   const handleFavButtonClick = () => {
     //즐겨찾기 버튼 온클릭핸들러
     setFavoriteIconStyle(!favoriteIconStyle);
+    like();
   };
   const handledDropdownClick = () => {
     setIsDropdownClicked(!isDropdownClicked);
