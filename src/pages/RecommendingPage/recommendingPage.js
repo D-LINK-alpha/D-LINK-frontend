@@ -8,20 +8,71 @@ import {ReactComponent as DropDownIcon} from '../../assets/dropDownIcon.svg';
 import { ReactComponent as SampleBeverageImage } from '../../assets/sampleBeverageImage.svg';
 import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 
 const RecommendingPage = () => {
   const location = useLocation();
   const clickedCardData = location.state.cardData;//클릭된 카드 데이터값 가져옴
+  const clickedCardId = location.state.id;
   const [favoriteIconStyle, setFavoriteIconStyle] = useState(false); //즐겨찾기 버튼 관리
   const [isDropdownClicked, setIsDropdownClicked] = useState(false);
+  const [cookies] = useCookies(['token']);
+
+  const recommend = async () => {
+    const token = cookies.token;
+    try{
+      const res = await axios.post(
+        `${process.env.REACT_APP_REST_API_URL}/api/history/recommend`,
+        {
+          beverageId: clickedCardId+1,
+          similarity: clickedCardData.similarity
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      if(res.data.msg === '이걸로 할래요 성공')
+        console.log('res:', res);
+    }catch (error){
+      console.error('recommend error!!', error);
+    }
+  };
+
+  const like = async () => {
+    const token = cookies.token;
+    try{
+      const res = await axios.post(
+        `${process.env.REACT_APP_REST_API_URL}/api/history/like`,
+        {
+          beverageId: clickedCardId+1,
+          historyId: 0 // 추후 수정
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      console.log(clickedCardData.id);
+      console.log('getHistory res:', res);
+    }catch (error){
+      console.error('like error!!', error);
+    }
+  };
+
   const handleFavButtonClick = () => {
     //즐겨찾기 버튼 온클릭핸들러
     setFavoriteIconStyle(!favoriteIconStyle);
+    like();
   };
   const handledDropdownClick = () => {
     setIsDropdownClicked(!isDropdownClicked);
   }
+
+
+
   return (
     <>
       <Header title="Recommendation" />
@@ -98,6 +149,7 @@ const RecommendingPage = () => {
                 variant="contained"
                 size="medium"
                 style={{ backgroundColor: '#3FCC7C', borderRadius: '22px' }}
+                onClick={recommend}
               >
                 이걸로 할래요
               </Button>

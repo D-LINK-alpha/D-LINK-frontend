@@ -20,7 +20,6 @@ const HistoryPage = () => {
 
   const getHistory = async () => {
     const token = cookies.token;
-    console.log(token);
     try{
       const res = await axios.get(
         `${process.env.REACT_APP_REST_API_URL}/api/history`,
@@ -32,7 +31,7 @@ const HistoryPage = () => {
       console.log('getHistory res:', res);
       return res.data;
     }catch (error){
-      console.error('error!!', error);
+      console.error('getHistory error!!', error);
       return [];
     }
   };
@@ -59,7 +58,6 @@ const HistoryPage = () => {
 
     fetchData();
   }, [date]);
-
 
 
   const moveDate = (direction) => {
@@ -112,11 +110,13 @@ const HistoryPage = () => {
                       <Item
                         key={index}
                         drinkName={item.beverage.name}
-                        similarity={item.beverage.similarity}
-                        cafeName={item.cafe}
+                        similarity={item.similarity}
+                        cafeName={item.beverage.cafe}
                         drinkType={item.beverage.type}
                         isRecommended={item.isRecommended}
                         isLike={item.isLike}
+                        historyId={item.historyId}
+                        beverageId={item.beverage.id}
                       />
                     ))}
                   </div>
@@ -128,11 +128,13 @@ const HistoryPage = () => {
                       <Item
                         key={index}
                         drinkName={item.beverage.name}
-                        similarity={item.beverage.similarity}
-                        cafeName={item.cafeName}
+                        similarity={item.similarity}
+                        cafeName={item.beverage.cafe}
                         drinkType={item.beverage.type}
                         isRecommended={item.isRecommended}
                         isLike={item.isLike}
+                        historyId={item.historyId}
+                        beverageId={item.beverage.id}
                       />
                     ))}
                   </>
