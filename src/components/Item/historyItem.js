@@ -10,34 +10,30 @@ import { ReactComponent as BigBlueIcon } from '../../assets/blue.svg';
 import { ReactComponent as BigYellowIcon } from '../../assets/yellow.svg';
 import { ReactComponent as Star } from '../../assets/star.svg';
 
-const Item = ({drinkName, similarity, cafeName, drinkType, isLike, bookmark }) => {
+const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike }) => {
   let iconComponent;
-  const [clicked, setClicked] = useState(bookmark);
+  const [clicked, setClicked] = useState(isLike);
   const onClick = () => setClicked(!clicked);
-  const boxStyle = isLike === true ? 'rounded-[16px] h-[68px]' : 'rounded-[10px] h-[48px] justify-between px-[27px]';
+  const boxStyle = isRecommended === true ? 'rounded-[16px] h-[68px]' : 'rounded-[10px] h-[48px] justify-between px-[27px]';
   let iconSize;
 
   // 아이콘 설정
   switch (drinkType) {
     case 'coffee':
-      if(isLike) iconComponent = <BigRedIcon />;
-      else iconComponent = <SmallRedIcon />;
-      iconSize = 'w-[59px] h-[59px] ml-[9px]';
+      iconComponent = isRecommended ? <BigRedIcon /> : <SmallRedIcon />;
+      iconSize = 'w-[59px] h-[59px] ml-[9px] mr-[4px]';
       break
     case 'latte':
-      if(isLike) iconComponent = <BigBlueIcon />;
-      else iconComponent = <SmallBlueIcon />;
-      iconSize = 'w-[40px] h-[40px] ml-[19px]';
+      iconComponent = isRecommended ? <BigBlueIcon /> : <SmallBlueIcon />;
+      iconSize = 'w-[40px] h-[40px] ml-[19px] mr-[13px]';
       break;
     case 'ade':
-      if(isLike) iconComponent = <BigYellowIcon />;
-      else iconComponent = <SmallYellowIcon />;
-      iconSize = 'w-[41px] h-[40px] ml-[19px]';
+      iconComponent = isRecommended ? <BigYellowIcon /> : <SmallYellowIcon />;
+      iconSize = 'w-[41px] h-[40px] ml-[19px] mr-[12px]';
       break;
     case 'tea':
-      if(isLike) iconComponent = <BigGreenIcon />;
-      else iconComponent = <SmallGreenIcon />;
-      iconSize = 'w-[53px] h-[54px] ml-[15px]';
+      iconComponent = isRecommended ? <BigGreenIcon /> : <SmallGreenIcon />;
+      iconSize = 'w-[53px] h-[54px] ml-[15px] mr-[4px]';
       break;
     default:
       iconComponent = null;
@@ -47,15 +43,15 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isLike, bookmark }) =
 
   return (
       <div className={`flex items-center w-[329px] bg-[#EDEDED] mb-[10px] ${boxStyle}`}>
-        {isLike === true ? (
+        {isRecommended === true ? (
           <>
-            <div className={`${iconSize}`}>
+            <div className={`${iconSize} flex-shrink-0`}>
               {iconComponent}
             </div>
-            <div className="text-[28px] ">
+            <div className="text-[28px] flex-shrink-0">
               {similarity}
             </div>
-            <div className="text-left pl-[56px]">
+            <div className="flex flex-col text-left flex-grow pl-[20px]">
               <div className="text-[12px]">
                 {cafeName}
               </div>
@@ -83,8 +79,8 @@ Item.propTypes = {
   similarity: PropTypes.string.isRequired,
   cafeName: PropTypes.string.isRequired,
   drinkType: PropTypes.string.isRequired,
+  isRecommended: PropTypes.bool.isRequired,
   isLike: PropTypes.bool.isRequired,
-  bookmark: PropTypes.bool.isRequired,
 };
 
 export default Item;
