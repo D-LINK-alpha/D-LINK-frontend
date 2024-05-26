@@ -45,3 +45,5 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
+# key files
+/cert
