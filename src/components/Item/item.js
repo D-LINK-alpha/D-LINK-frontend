@@ -5,27 +5,32 @@ import { ReactComponent as GreenIcon } from "../../assets/green.svg";
 import { ReactComponent as BlueIcon } from "../../assets/blue.svg";
 import { ReactComponent as YellowIcon } from "../../assets/yellow.svg";
 
-const Item = ({drinkName, similarity, cafeName, drinkType, index, size }) => {
+const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt }) => {
   let iconComponent;
   let iconSize;
+  let iconPadding;
 
   // 아이콘 설정
   switch (drinkType) {
     case 'coffee':
       iconComponent = <RedIcon />;
-      iconSize = 'w-[115px] h-[115px]';
+      iconSize = 'w-[120px] h-[120px]';
+      iconPadding = 'pr-[16px] pb-[4px]';
       break;
     case 'latte':
       iconComponent = <BlueIcon />;
       iconSize = 'w-[102px] h-[101px]';
+      iconPadding = 'pr-[24px] pb-[22px]';
       break;
     case 'ade':
       iconComponent = <YellowIcon />;
-      iconSize = 'w-[128px] h-[131px]';
+      iconSize = 'w-[102px] h-[99px]';
+      iconPadding = 'pr-[30px] pb-[25px]';
       break;
     case 'tea':
       iconComponent = <GreenIcon />;
       iconSize = 'w-[128px] h-[131px]';
+      iconPadding = 'pr-[13px] pb-[24px]';
       break;
     default:
       iconComponent = null;
@@ -39,36 +44,52 @@ const Item = ({drinkName, similarity, cafeName, drinkType, index, size }) => {
     tea: 'bg-[#3FCC7C]',  // green
   };
 
-  const sizeClass = size === 'big' ? 'rounded-[29px]' : 'rounded-[17px] mt-[8px]';
+  const small = 'w-[247px] h-[48px] rounded-[17px] mb-[8px] pr-[19px] text-[#232322] text-[14px] font-bold'
+  const sizeClass = size === 'big' ? 'w-[329px] h-[197px] rounded-[29px] text-white mb-[10px]' : small;
+
+  const date = new Date(createdAt);
+  const formatDate = (date) => {
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${month}.${day}`;
+  };
 
   return (
-    <div className={`flex text-white ${bgColor[drinkType]} ${sizeClass}`}>
+    <>
       {size === 'big' ? (
-        <>
-          <div className='flex flex-col items-start h-[197px] pl-[28px]'>
-            <div className='text-[52px] pt-[21px]'>
+        <div className={`flex ${bgColor[drinkType]} ${sizeClass}`}>
+          <div className="flex flex-col items-start pl-[28px] pt-[16px]">
+            <div className="underline underline-offset-2 text-[18px] font-semibold pl-[5px]">
+              {formatDate(date)}
+            </div>
+            <div className="text-[48px]">
               {similarity}
             </div>
-            <div className='text-[12px] pt-[8px]'>
+            <div className="text-[12px] pt-[8px]">
               {cafeName}
             </div>
-            <div className='text-[16px] font-bold pt-[4px]'>
+            <div className="text-[16px] font-bold pt-[4px]">
               {drinkName}
             </div>
           </div>
-          <div className={`content-end ${iconSize}`}>
-            {iconComponent}
+          <div className={`ml-auto place-self-end ${iconPadding}`}>
+            <div className={iconSize}>
+              {iconComponent}
+            </div>
           </div>
-        </>
+        </div>
       ) : (
-        <div className="flex justify-between w-[329px] h-[48px] pt-[13px] pl-[17px] pr-[19px] text-[#232322] text-[14px] font-bold">
-          <div className="content-center w-[22px] h-[22px] rounded-full bg-[#232322] text-white text-[12px]">
-            {index}
-          </div>
+        <div className="flex items-center justify-between">
+        <div className="underline underline-offset-2 text-[18px] font-semibold text-white pl-[12px]">
+          {formatDate(date)}
+        </div>
+        <div className={`flex items-center justify-end ${bgColor[drinkType]} ${sizeClass}`}>
           {drinkName}
         </div>
-      )}
-    </div>
+        </div>
+  )
+}
+</>
   );
 };
 
@@ -77,8 +98,8 @@ Item.propTypes = {
   similarity: PropTypes.string.isRequired,
   cafeName: PropTypes.string.isRequired,
   drinkType: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
   size: PropTypes.string.isRequired,
+  createdAt: PropTypes.string.isRequired,
 };
 
 export default Item;

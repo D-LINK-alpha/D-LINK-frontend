@@ -9,7 +9,7 @@ const LandingPage = () => {
 
   const dummyData = [
     {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'coffee', isLike:true, bookmark:false, createdAt: "2024-05-27T06:34:15.666Z"},
-    {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'latte', isLike:true, bookmark:false, createdAt: "2024-05-27T06:34:15.666Z"},
+    {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'latte', isLike:true, bookmark:false, createdAt: "2024-05-26T06:34:15.666Z"},
     {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'ade', isLike:true, bookmark:false, createdAt: "2024-05-23T06:34:15.666Z"},
     {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'tea', isLike:true, bookmark:false, createdAt: "2024-05-23T06:34:15.666Z"},
     {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'coffee', isLike:false, bookmark:true, createdAt: "2024-05-23T06:34:15.666Z"},
@@ -54,8 +54,8 @@ const LandingPage = () => {
                 similarity={item.similarity}
                 cafeName={item.cafeName}
                 drinkType={item.drinkType}
-                index={index + 1}
                 size={index === 0 ? 'big' : 'small'}
+                createdAt={item.createdAt}
               />
             ))}
           </div>
