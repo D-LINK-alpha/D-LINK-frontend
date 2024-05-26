@@ -20,24 +20,20 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isLike, bookmark }) =
   // 아이콘 설정
   switch (drinkType) {
     case 'coffee':
-      if(isLike) iconComponent = <BigRedIcon />;
-      else iconComponent = <SmallRedIcon />;
-      iconSize = 'w-[59px] h-[59px] ml-[9px]';
+      iconComponent = isLike ? <BigRedIcon /> : <SmallRedIcon />;
+      iconSize = 'w-[59px] h-[59px] ml-[9px] mr-[4px]';
       break
     case 'latte':
-      if(isLike) iconComponent = <BigBlueIcon />;
-      else iconComponent = <SmallBlueIcon />;
-      iconSize = 'w-[40px] h-[40px] ml-[19px]';
+      iconComponent = isLike ? <BigBlueIcon /> : <SmallBlueIcon />;
+      iconSize = 'w-[40px] h-[40px] ml-[19px] mr-[13px]';
       break;
     case 'ade':
-      if(isLike) iconComponent = <BigYellowIcon />;
-      else iconComponent = <SmallYellowIcon />;
-      iconSize = 'w-[41px] h-[40px] ml-[19px]';
+      iconComponent = isLike ? <BigYellowIcon /> : <SmallYellowIcon />;
+      iconSize = 'w-[41px] h-[40px] ml-[19px] mr-[12px]';
       break;
     case 'tea':
-      if(isLike) iconComponent = <BigGreenIcon />;
-      else iconComponent = <SmallGreenIcon />;
-      iconSize = 'w-[53px] h-[54px] ml-[15px]';
+      iconComponent = isLike ? <BigGreenIcon /> : <SmallGreenIcon />;
+      iconSize = 'w-[53px] h-[54px] ml-[15px] mr-[4px]';
       break;
     default:
       iconComponent = null;
@@ -49,13 +45,13 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isLike, bookmark }) =
       <div className={`flex items-center w-[329px] bg-[#EDEDED] mb-[10px] ${boxStyle}`}>
         {isLike === true ? (
           <>
-            <div className={`${iconSize}`}>
+            <div className={`${iconSize} flex-shrink-0`}>
               {iconComponent}
             </div>
-            <div className="text-[28px] ">
+            <div className="text-[28px] flex-shrink-0">
               {similarity}
             </div>
-            <div className="text-left pl-[56px]">
+            <div className="flex flex-col text-left flex-grow pl-[20px]">
               <div className="text-[12px]">
                 {cafeName}
               </div>
