@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MuiButton from '../../components/Button/muiButton';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../recoil/userState';
 
 export default function Join() {
-  const [name, setName] = useState('');
+  const [user, setUser] = useRecoilState(userState);
   const navigate = useNavigate();
-  const [cookies] = useCookies(['email']);
+  const [cookies, setCookie] = useCookies(['email', 'token']);
 
   const handleJoin = async () => {
     const email = cookies.email;
@@ -22,16 +24,22 @@ export default function Join() {
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_REST_API_URL}/api/auth/join`,
-
         {
           email: email,
-          nickname: name,
+          nickname: user.nickname,
         },
         {
           withCredentials: true,
         },
       );
       if (res.data.msg === 'success') {
+        console.log('Headers:', res.headers);
+        const authorizationHeader =
+          res.headers['authorization'] || res.headers['Authorization']; // 서버로부터 받은 토큰
+        const token = authorizationHeader.replace('Bearer ', '');
+        console.log(token);
+        setCookie('token', token, { path: '/' }); // 쿠키에 토큰 저장
+        setUser({ ...user });
         navigate('/main');
       } else {
         alert('회원 가입 실패');
@@ -39,6 +47,10 @@ export default function Join() {
     } catch (error) {
       alert('오류 발생');
     }
+  };
+
+  const handleNicknameChange = (e) => {
+    setUser({ ...user, nickname: e.target.value });
   };
 
   return (
@@ -51,7 +63,8 @@ export default function Join() {
           w-56 font-medium focus:outline-none
           border-b-[1px] border-solid border-b-white
           text-center"
-          onChange={(e) => setName(e.target.value)}
+          onChange={handleNicknameChange}
+          value={user.nickname}
         />
       </div>
       <p className="text-[#868686] text-sm pt-8">

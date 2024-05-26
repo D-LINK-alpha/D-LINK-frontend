@@ -11,7 +11,12 @@ const HistoryPage = () => {
   const week= ["일", "월", "화", "수", "목", "금", "토"];
   const canGoBack = date > new Date(Date.now() - 7 * (24 * 60 * 60 * 1000));
   const canGoForward = date < new Date().setHours(0, 0, 0, 0);
+  const likedItems = filteredData.filter(item => item.isLike);
+  const dislikedItems = filteredData.filter(item => !item.isLike);
+  const isEmpty = likedItems.length === 0 && dislikedItems.length === 0;
 
+
+  // isLike=='이걸로 할래요', bookmark=='즐겨찾기'
   const dummyData = [
     {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'coffee', isLike:true, bookmark:false, createdAt: "2024-05-23T06:34:15.666Z"},
     {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'latte', isLike:true, bookmark:false, createdAt: "2024-05-23T06:34:15.666Z"},
@@ -21,7 +26,6 @@ const HistoryPage = () => {
     {drinkName: '쇼콜라 말차 모카', similarity:'80%', cafeName:'오설록', drinkType:'latte', isLike:false, bookmark:false, createdAt: "2024-05-23T06:34:15.666Z"},
     {drinkName: '말차 초콜릿 라떼', similarity:'70%', cafeName:'오설록', drinkType:'latte', isLike:false, bookmark:true, createdAt: "2024-05-23T06:34:15.666Z"},
     {drinkName: '밀크폼 그린티', similarity:'60%', cafeName:'오설록', drinkType:'tea', isLike:false, bookmark:true, createdAt: "2024-05-22T06:34:15.666Z"},
-
   ];
 
   useEffect(() => {
@@ -41,6 +45,7 @@ const HistoryPage = () => {
     setFilteredData(filtered);
   }, [date]);
 
+
   const moveDate = (direction) => {
     setDate((prevDate) => {
       const newDate = new Date(prevDate);
@@ -48,6 +53,7 @@ const HistoryPage = () => {
       return newDate;
     });
   };
+
 
   return (
     <div>
@@ -62,17 +68,18 @@ const HistoryPage = () => {
                 className="disabled:opacity-50"
               >
                 <BackIcon className="w-[8px] h-[11px] mr-[20px]" />
-              </button>
-              <div className="flex flex-col justify-center w-[217px] h-[33px] rounded-[12px] bg-[#EDEDED] text-[15px] font-bold">
-                {formattedDate}
-              </div>
-              <button
-                onClick={() => moveDate(1)}
-                disabled={!canGoForward}
-                className="disabled:opacity-50"
-              >
-                <BackIcon className="w-[8px] h-[11px] rotate-180 ml-[20px]" />
-              </button>
+                </button>
+                <div
+                  className="flex flex-col justify-center w-[217px] h-[33px] rounded-[12px] bg-[#EDEDED] text-[15px] font-bold">
+                  {formattedDate}
+                </div>
+                <button
+                  onClick={() => moveDate(1)}
+                  disabled={!canGoForward}
+                  className="disabled:opacity-50"
+                >
+                  <BackIcon className="w-[8px] h-[11px] rotate-180 ml-[20px]" />
+                  </button>
             </div>
             <div className="text-[12px] text-white font-normal pt-[15px]">
               추천 히스토리는 일주일 전 기록까지만 확인이 가능해요.

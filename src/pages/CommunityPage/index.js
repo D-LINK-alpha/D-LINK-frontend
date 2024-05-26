@@ -25,19 +25,27 @@ export default function CommunityPage() {
           `${process.env.REACT_APP_REST_API_URL}/api/article`,
         );
 
-        const data = response.data.map((item, index) => ({
-          postId: index + 1, // index를 기반으로 postId 추가
+        console.log('Response data:', response.data); // 서버에서 받은 전체 데이터를 출력
+
+        const data = response.data.map((item) => ({
+          postId: item.postId,
           img: item.files[0]?.url || '',
           title: item.title,
-          isLike: item.likes, // 실제 likes 값을 사용
+          content: item.content,
+          nickname: item.nickname,
+          likes: item.likes,
+          createdAt: item.createdAt,
+          isLike: item.isLike,
         }));
+
+        console.log('Mapped data:', data); // 매핑 후 데이터를 출력
 
         setItemData(data);
 
-        // isLike 값이 가장 많은 항목 찾기
+        // likes 값이 가장 많은 항목 찾기
         if (data.length > 0) {
           const topItem = data.reduce((prev, current) =>
-            prev.isLike > current.isLike ? prev : current,
+            prev.likes > current.likes ? prev : current,
           );
           setTopLikeItem(topItem);
         }
@@ -52,10 +60,10 @@ export default function CommunityPage() {
   const sortedItemData = [...itemData].sort((a, b) => {
     if (isLatestClicked) {
       // 최신순
-      return b.isLike - a.isLike;
+      return new Date(b.createdAt) - new Date(a.createdAt);
     } else {
       // 인기순
-      return b.isLike - a.isLike;
+      return b.likes - a.likes;
     }
   });
 
@@ -80,7 +88,7 @@ export default function CommunityPage() {
             <div className="flex px-[23px]">
               <p className="text-xl text-amber-50 py-[18px]">오늘의 꿀조합</p>
             </div>
-            {topLikeItem && (
+            {topLikeItem ? (
               <Link to={`/community/post/${topLikeItem.postId}`}>
                 <div
                   className="flex justify-center cursor-pointer"
@@ -94,25 +102,26 @@ export default function CommunityPage() {
                   />
                 </div>
               </Link>
-            )}
-            {!topLikeItem && (
+            ) : (
               <div className="flex justify-center cursor-pointer">
                 <DrinkSample />
               </div>
             )}
-            <div className="flex pt-[18px]">
-              <div className="pl-[35px]">
-                <ProfileIcon size={32} />
+            {topLikeItem && (
+              <div className="flex pt-[18px]">
+                <div className="pl-[35px]">
+                  <ProfileIcon size={32} />
+                </div>
+                <div className="pl-[10px] flex-col">
+                  <p className="text-sm text-amber-50 font-bold">
+                    {topLikeItem.title}
+                  </p>
+                  <p className="text-[10px] font-normal text-amber-50 flex self-start">
+                    {topLikeItem.nickname}
+                  </p>
+                </div>
               </div>
-              <div className="pl-[10px] flex-col">
-                <p className="text-sm text-amber-50 font-bold">
-                  스타벅스 #꿀조합 아샷추
-                </p>
-                <p className="text-[10px] font-normal text-amber-50 flex self-start">
-                  @daun_up
-                </p>
-              </div>
-            </div>
+            )}
           </div>
           <div className="pt-[12px] flex justify-end px-[23px]">
             <ButtonGroup variant="text" aria-label="Basic button group">
