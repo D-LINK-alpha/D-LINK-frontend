@@ -3,12 +3,15 @@ import Spinner from '../../assets/loadingSpinner.gif';
 import { ReactComponent as GroupIcon } from '../../assets/iconGroup.svg';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { useRecoilState } from 'recoil';
+import { userState } from '../../recoil/userState';
 
 const LoadingPage = () => {
   const navigate = useNavigate();
   const email = new URL(window.location.href).searchParams.get('email');
   const token = new URL(window.location.href).searchParams.get('token');
   const [, setCookie] = useCookies(['email', 'token']);
+  const [user, setUser] = useRecoilState(userState);
 
   const kakaoLogin = () => {
     console.log(email);
@@ -16,6 +19,7 @@ const LoadingPage = () => {
     if (email) {
       // 첫 로그인이라면
       setCookie('email', email, { path: '/' });
+      setUser({ nickname: user.nickname });
       navigate('/join');
     } else {
       // 첫 로그인이 아니라면
