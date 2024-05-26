@@ -34,8 +34,9 @@ export default function Join() {
       );
       if (res.data.msg === 'success') {
         console.log('Headers:', res.headers);
-        const token =
+        const authorizationHeader =
           res.headers['authorization'] || res.headers['Authorization']; // 서버로부터 받은 토큰
+        const token = authorizationHeader.replace('Bearer ', '');
         console.log(token);
         setCookie('token', token, { path: '/' }); // 쿠키에 토큰 저장
         setUser({ ...user });

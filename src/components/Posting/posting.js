@@ -5,6 +5,8 @@ import Slider from 'react-slick';
 import PropTypes from 'prop-types';
 import '../../styles/dots.css';
 import ProfileIcon from '../Profile';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
 Posting.propTypes = {
   title: PropTypes.string.isRequired,
@@ -14,6 +16,9 @@ Posting.propTypes = {
   content: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   imageSrcArray: PropTypes.arrayOf(PropTypes.string),
+  currentUser: PropTypes.string.isRequired,
+  postId: PropTypes.string.isRequired,
+  onDeleteSuccess: PropTypes.func.isRequired,
 };
 
 export default function Posting({
@@ -24,12 +29,51 @@ export default function Posting({
   content,
   createdAt,
   imageSrcArray,
+  currentUser,
+  postId,
+  onDeleteSuccess,
 }) {
-  const onClick = () => setIsLike(!isLike);
+  const [cookies] = useCookies(['token']);
+
+  const handleLikeClick = async () => {
+    const token = cookies.token;
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_REST_API_URL}/api/article/like`,
+        { postId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setIsLike(!isLike);
+    } catch (error) {
+      console.error('Error liking post:', error);
+    }
+  };
+
+  const handleDelete = async () => {
+    const token = cookies.token;
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_REST_API_URL}/api/article/delete/${postId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      onDeleteSuccess();
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      alert('게시물 삭제 중 오류가 발생했습니다.');
+    }
+  };
 
   const settings = {
     dots: true,
-    infinite: false, // 무한 반복을 일시적으로 비활성화
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -43,7 +87,7 @@ export default function Posting({
         <div className="bg-[#363636]">
           <div className="flex pl-[35px] pr-8 justify-between">
             <p className="text-[10px] text-[#8E8E8E] pt-[22px]">{createdAt}</p>
-            <div onClick={onClick} className="cursor-pointer self-end">
+            <div onClick={handleLikeClick} className="cursor-pointer self-end">
               {isLike ? <FullHeart /> : <Heart />}
             </div>
           </div>
@@ -56,6 +100,14 @@ export default function Posting({
               <ProfileIcon size={16} />
             </div>
             <p className="text-[10px] text-[#8E8E8E] pt-[8px] pb-4">{user}</p>
+            {currentUser === user && (
+              <button
+                onClick={handleDelete}
+                className="text-[10px] text-red-500 ml-2"
+              >
+                삭제
+              </button>
+            )}
           </div>
         </div>
 
@@ -68,7 +120,7 @@ export default function Posting({
                     <div key={index}>
                       <img
                         src={src}
-                        alt={`Post Image ${index + 1}`}
+                        alt={`Post Image ${index}`}
                         className="object-cover w-full h-full min-h-[375px] min-w-[375px]"
                       />
                     </div>

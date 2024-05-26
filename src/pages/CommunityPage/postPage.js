@@ -4,15 +4,19 @@ import * as React from 'react';
 import Posting from '../../components/Posting/posting';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import PostLoadingPage from '../LoadingPage/postLoadingPage';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../recoil/userState';
 
 export default function PostPage() {
   const { postId } = useParams(); // useParams 훅을 사용하여 postId를 가져옴
   const [postData, setPostData] = useState(null);
   const [isLike, setIsLike] = useState(false);
   const [cookies] = useCookies(['token', 'email']);
+  const currentUser = useRecoilValue(userState).nickname;
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log('Email from cookie:', cookies.email); // Debugging log
@@ -47,9 +51,30 @@ export default function PostPage() {
     fetchData();
   }, [postId, cookies]); // postId와 cookies가 변경될 때마다 fetchData를 호출
 
+  const handleDeleteSuccess = () => {
+    navigate('/community'); // 삭제 성공 후 메인 페이지로 리디렉션
+  };
+
+  const handleLikeClick = async () => {
+    const token = cookies.token;
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_REST_API_URL}/api/article/like`,
+        { postId },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      setIsLike(!isLike);
+    } catch (error) {
+      console.error('Error liking post:', error);
+    }
+  };
+
   if (!postData) {
     return <PostLoadingPage />;
-    // return <div>loading...</div>;
   }
 
   return (
@@ -69,6 +94,10 @@ export default function PostPage() {
               setIsLike={setIsLike}
               createdAt={postData.createdAt}
               imageSrcArray={postData.imageSrcArray}
+              currentUser={currentUser} // 현재 사용자 닉네임 전달
+              postId={postId} // postId 전달
+              onDeleteSuccess={handleDeleteSuccess} // 삭제 성공 후 호출할 콜백 함수 전달
+              onLikeClick={handleLikeClick} // 하트 클릭 이벤트 핸들러 전달
             />
           </div>
         </div>
