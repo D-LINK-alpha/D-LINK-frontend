@@ -67,7 +67,7 @@ const ResultPage = () => {
     setActiveCard(id);
     await wait();
     const clickedCardData = data[id];
-    navigate('./recommendingPage', {state: {cardData: clickedCardData}});
+    navigate('./recommendingPage', {state: {id, cardData: clickedCardData}});
   };
 
   const sortBySimilarity = () => {
