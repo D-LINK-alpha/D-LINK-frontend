@@ -32,7 +32,7 @@ const HistoryPage = () => {
       console.log('getHistory res:', res);
       return res.data;
     }catch (error){
-      console.error('error!!', error);
+      console.error('getHistory error!!', error);
       return [];
     }
   };
@@ -59,7 +59,6 @@ const HistoryPage = () => {
 
     fetchData();
   }, [date]);
-
 
 
   const moveDate = (direction) => {
@@ -113,7 +112,7 @@ const HistoryPage = () => {
                         key={index}
                         drinkName={item.beverage.name}
                         similarity={item.beverage.similarity}
-                        cafeName={item.cafe}
+                        cafeName={item.beverage.cafe}
                         drinkType={item.beverage.type}
                         isRecommended={item.isRecommended}
                         isLike={item.isLike}
@@ -129,10 +128,12 @@ const HistoryPage = () => {
                         key={index}
                         drinkName={item.beverage.name}
                         similarity={item.beverage.similarity}
-                        cafeName={item.cafeName}
+                        cafeName={item.beverage.cafe}
                         drinkType={item.beverage.type}
                         isRecommended={item.isRecommended}
                         isLike={item.isLike}
+                        historyId={item.historyId}
+                        beverageId={item.beverage.id}
                       />
                     ))}
                   </>

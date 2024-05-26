@@ -9,13 +9,39 @@ import { ReactComponent as BigGreenIcon } from '../../assets/green.svg';
 import { ReactComponent as BigBlueIcon } from '../../assets/blue.svg';
 import { ReactComponent as BigYellowIcon } from '../../assets/yellow.svg';
 import { ReactComponent as Star } from '../../assets/star.svg';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 
-const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike }) => {
+const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike, historyId, beverageId }) => {
   let iconComponent;
   const [clicked, setClicked] = useState(isLike);
-  const onClick = () => setClicked(!clicked);
+  const onClick = () => {
+    setClicked(!clicked);
+    like()
+  };
   const boxStyle = isRecommended === true ? 'rounded-[16px] h-[68px]' : 'rounded-[10px] h-[48px] justify-between px-[27px]';
   let iconSize;
+  const [cookies] = useCookies(['token']);
+
+  const like = async () => {
+    const token = cookies.token;
+    try{
+      const res = await axios.post(
+        `${process.env.REACT_APP_REST_API_URL}/api/history/recommend`,
+        {
+          beverageId: beverageId,
+          historyId: historyId
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
+      console.log('getHistory res:', res);
+    }catch (error){
+      console.error('like error!!', error);
+    }
+  };
 
   // 아이콘 설정
   switch (drinkType) {
@@ -81,6 +107,8 @@ Item.propTypes = {
   drinkType: PropTypes.string.isRequired,
   isRecommended: PropTypes.bool.isRequired,
   isLike: PropTypes.bool.isRequired,
+  beverageId: PropTypes.number.isRequired,
+  historyId: PropTypes.number.isRequired,
 };
 
 export default Item;
