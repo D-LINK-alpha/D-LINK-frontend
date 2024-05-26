@@ -10,29 +10,29 @@ import { ReactComponent as BigBlueIcon } from '../../assets/blue.svg';
 import { ReactComponent as BigYellowIcon } from '../../assets/yellow.svg';
 import { ReactComponent as Star } from '../../assets/star.svg';
 
-const Item = ({drinkName, similarity, cafeName, drinkType, isLike, bookmark }) => {
+const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike }) => {
   let iconComponent;
-  const [clicked, setClicked] = useState(bookmark);
+  const [clicked, setClicked] = useState(isLike);
   const onClick = () => setClicked(!clicked);
-  const boxStyle = isLike === true ? 'rounded-[16px] h-[68px]' : 'rounded-[10px] h-[48px] justify-between px-[27px]';
+  const boxStyle = isRecommended === true ? 'rounded-[16px] h-[68px]' : 'rounded-[10px] h-[48px] justify-between px-[27px]';
   let iconSize;
 
   // 아이콘 설정
   switch (drinkType) {
     case 'coffee':
-      iconComponent = isLike ? <BigRedIcon /> : <SmallRedIcon />;
+      iconComponent = isRecommended ? <BigRedIcon /> : <SmallRedIcon />;
       iconSize = 'w-[59px] h-[59px] ml-[9px] mr-[4px]';
       break
     case 'latte':
-      iconComponent = isLike ? <BigBlueIcon /> : <SmallBlueIcon />;
+      iconComponent = isRecommended ? <BigBlueIcon /> : <SmallBlueIcon />;
       iconSize = 'w-[40px] h-[40px] ml-[19px] mr-[13px]';
       break;
     case 'ade':
-      iconComponent = isLike ? <BigYellowIcon /> : <SmallYellowIcon />;
+      iconComponent = isRecommended ? <BigYellowIcon /> : <SmallYellowIcon />;
       iconSize = 'w-[41px] h-[40px] ml-[19px] mr-[12px]';
       break;
     case 'tea':
-      iconComponent = isLike ? <BigGreenIcon /> : <SmallGreenIcon />;
+      iconComponent = isRecommended ? <BigGreenIcon /> : <SmallGreenIcon />;
       iconSize = 'w-[53px] h-[54px] ml-[15px] mr-[4px]';
       break;
     default:
@@ -43,7 +43,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isLike, bookmark }) =
 
   return (
       <div className={`flex items-center w-[329px] bg-[#EDEDED] mb-[10px] ${boxStyle}`}>
-        {isLike === true ? (
+        {isRecommended === true ? (
           <>
             <div className={`${iconSize} flex-shrink-0`}>
               {iconComponent}
@@ -79,8 +79,8 @@ Item.propTypes = {
   similarity: PropTypes.string.isRequired,
   cafeName: PropTypes.string.isRequired,
   drinkType: PropTypes.string.isRequired,
+  isRecommended: PropTypes.bool.isRequired,
   isLike: PropTypes.bool.isRequired,
-  bookmark: PropTypes.bool.isRequired,
 };
 
 export default Item;
