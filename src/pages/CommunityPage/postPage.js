@@ -8,13 +8,15 @@ import { useParams } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import PostLoadingPage from '../LoadingPage/postLoadingPage';
 
-export default function postPage() {
+export default function PostPage() {
   const { postId } = useParams(); // useParams 훅을 사용하여 postId를 가져옴
   const [postData, setPostData] = useState(null);
   const [isLike, setIsLike] = useState(false);
-  const [cookies] = useCookies(['token']);
+  const [cookies] = useCookies(['token', 'email']);
 
   useEffect(() => {
+    console.log('Email from cookie:', cookies.email); // Debugging log
+
     const fetchData = async () => {
       const token = cookies.token;
       try {
@@ -43,7 +45,7 @@ export default function postPage() {
     };
 
     fetchData();
-  }, [postId]); // postId가 변경될 때마다 fetchData를 호출
+  }, [postId, cookies]); // postId와 cookies가 변경될 때마다 fetchData를 호출
 
   if (!postData) {
     return <PostLoadingPage />;
