@@ -35,6 +35,7 @@ const App = () => {
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/community/upload" element={<UploadPage />} />
         <Route path="/community/post" element={<PostPage />} />
+        <Route path="/community/post/:postId" element={<PostPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/setting" element={<SettingPage />} />
       </Routes>

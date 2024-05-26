@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
 import { ReactComponent as BackIcon } from '../../assets/back.svg';
@@ -8,15 +8,10 @@ const HistoryPage = () => {
   const [date, setDate] = useState(new Date());
   const [formattedDate, setFormattedDate] = useState('');
   const [filteredData, setFilteredData] = useState([]);
-  const week = ['일', '월', '화', '수', '목', '금', '토'];
+  const week= ["일", "월", "화", "수", "목", "금", "토"];
   const canGoBack = date > new Date(Date.now() - 7 * (24 * 60 * 60 * 1000));
   const canGoForward = date < new Date().setHours(0, 0, 0, 0);
-  const likedItems = filteredData.filter(item => item.isLike);
-  const dislikedItems = filteredData.filter(item => !item.isLike);
-  const isEmpty = likedItems.length === 0 && dislikedItems.length === 0;
 
-
-  // isLike=='이걸로 할래요', bookmark=='즐겨찾기'
   const dummyData = [
     {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'coffee', isLike:true, bookmark:false, createdAt: "2024-05-23T06:34:15.666Z"},
     {drinkName: '그린티 라떼 더블샷', similarity:'98%', cafeName:'오설록', drinkType:'latte', isLike:true, bookmark:false, createdAt: "2024-05-23T06:34:15.666Z"},
@@ -35,7 +30,7 @@ const HistoryPage = () => {
     setFormattedDate(formatted);
 
     // 날짜별로 데이터 분류
-    const filtered = dummyData.filter((item) => {
+    const filtered = dummyData.filter(item => {
       const itemDate = new Date(item.createdAt);
       return (
         itemDate.getFullYear() === date.getFullYear() &&
@@ -46,7 +41,6 @@ const HistoryPage = () => {
     setFilteredData(filtered);
   }, [date]);
 
-
   const moveDate = (direction) => {
     setDate((prevDate) => {
       const newDate = new Date(prevDate);
@@ -54,7 +48,6 @@ const HistoryPage = () => {
       return newDate;
     });
   };
-
 
   return (
     <div>
