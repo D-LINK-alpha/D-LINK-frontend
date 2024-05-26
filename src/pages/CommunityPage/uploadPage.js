@@ -6,12 +6,20 @@ import { useState } from 'react';
 import MuiButton from '../../components/Button/muiButton';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
+import { Link, useNavigate } from 'react-router-dom';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 
 export default function UploadPage() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [images, setImages] = useState([]);
   const [cookies] = useCookies(['token']);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [newPostId, setNewPostId] = useState(null);
+  const navigate = useNavigate();
   const titleMaxLength = 30;
   const contentMaxLength = 200;
 
@@ -39,15 +47,8 @@ export default function UploadPage() {
     const formData = new FormData();
     formData.append('title', title);
     formData.append('content', content);
-    console.log('images : ', images);
     for (let i = 0; i < images.length; i++) {
       formData.append('files', images[i]);
-    }
-    // formData.append('files', images);
-
-    // FormData 확인 로그
-    for (let pair of formData.entries()) {
-      console.log(pair[0] + ': ' + pair[1]);
     }
 
     const token = cookies.token;
@@ -63,9 +64,17 @@ export default function UploadPage() {
           },
         },
       );
-      console.log(response.data);
+      setNewPostId(response.data.postId); // postId 저장
+      setModalIsOpen(true); // 모달 열기
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const handleModalClose = () => {
+    setModalIsOpen(false);
+    if (newPostId) {
+      navigate(`/community`); // 새 게시물 페이지로 이동
     }
   };
 
@@ -128,10 +137,12 @@ export default function UploadPage() {
           </div>
           {/* 닫기 업로드 버튼 */}
           <div className="px-[23px] flex pt-[25px] pb-[25px] justify-end">
-            <MuiButton
-              className="w-[92px] h-[37px] rounded-3xl bg-[#363636] text-sm shadow-none text-[#8E8E8E]"
-              text="닫기"
-            />
+            <Link to={'/community'}>
+              <MuiButton
+                className="w-[92px] h-[37px] rounded-3xl bg-[#363636] text-sm shadow-none text-[#8E8E8E]"
+                text="닫기"
+              />
+            </Link>
             <MuiButton
               type="submit"
               className="w-[92px] h-[37px] rounded-3xl bg-[#3FCC7C] text-sm"
@@ -142,6 +153,37 @@ export default function UploadPage() {
         </div>
       </div>
       <Footer />
+
+      <Modal
+        open={modalIsOpen}
+        onClose={handleModalClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box
+          sx={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            width: 400,
+            bgcolor: 'background.paper',
+            border: '2px solid #000',
+            boxShadow: 24,
+            p: 4,
+          }}
+        >
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            작성 완료되었습니다!
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            게시물이 성공적으로 업로드되었습니다.
+          </Typography>
+          <Button onClick={handleModalClose} sx={{ mt: 2 }}>
+            확인
+          </Button>
+        </Box>
+      </Modal>
     </div>
   );
 }
