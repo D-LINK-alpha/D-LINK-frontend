@@ -35,7 +35,7 @@ const RecommendingPage = () => {
           }
         });
       if(res.data.msg === '이걸로 할래요 성공')
-        console.log('res:', res);
+        console.log('recommend res:', res);
     }catch (error){
       console.error('recommend error!!', error);
     }
@@ -45,18 +45,18 @@ const RecommendingPage = () => {
     const token = cookies.token;
     try{
       const res = await axios.post(
-        `${process.env.REACT_APP_REST_API_URL}/api/history/like`,
+        `${process.env.REACT_APP_REST_API_URL}/api/history/like-main`,
         {
           beverageId: clickedCardId+1,
-          historyId: 0 // 추후 수정
         },
         {
           headers: {
             Authorization: `Bearer ${token}`
           }
         });
-      console.log(clickedCardData.id);
-      console.log('getHistory res:', res);
+      if(res.data.msg === 'success')
+        console.log(clickedCardData.id);
+        console.log('like res:', res);
     }catch (error){
       console.error('like error!!', error);
     }
