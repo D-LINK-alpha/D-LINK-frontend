@@ -19,6 +19,7 @@ Posting.propTypes = {
   currentUser: PropTypes.string.isRequired,
   postId: PropTypes.string.isRequired,
   onDeleteSuccess: PropTypes.func.isRequired,
+  likes: PropTypes.number.isRequired,
 };
 
 export default function Posting({
@@ -32,6 +33,7 @@ export default function Posting({
   currentUser,
   postId,
   onDeleteSuccess,
+  likes,
 }) {
   const [cookies] = useCookies(['token']);
 
@@ -87,8 +89,13 @@ export default function Posting({
         <div className="bg-[#363636]">
           <div className="flex pl-[35px] pr-8 justify-between">
             <p className="text-[10px] text-[#8E8E8E] pt-[22px]">{createdAt}</p>
-            <div onClick={handleLikeClick} className="cursor-pointer self-end">
-              {isLike ? <FullHeart /> : <Heart />}
+            <div className="mt-[15px]">
+              <div onClick={handleLikeClick} className="self-end">
+                {isLike ? <FullHeart /> : <Heart />}
+              </div>
+              <div className="text-[10px] text-[#ffffff] self-end flex justify-center">
+                <p className="pt-[2px]">{likes}</p>
+              </div>
             </div>
           </div>
 
@@ -117,13 +124,13 @@ export default function Posting({
           <div className="flex justify-center">
             <div className="w-full h-full">
               {imageSrcArray && imageSrcArray.length > 0 && (
-                <Slider {...settings}>
+                <Slider {...settings} className="flex-col ">
                   {imageSrcArray.map((src, index) => (
                     <div key={index}>
                       <img
                         src={src}
                         alt={`Post Image ${index}`}
-                        className="object-cover min-h-[375px] min-w-[375px] w-full h-full"
+                        className="object-cover h-[375px] min-w-[375px] w-full "
                       />
                     </div>
                   ))}
