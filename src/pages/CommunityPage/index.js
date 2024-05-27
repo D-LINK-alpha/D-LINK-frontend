@@ -89,7 +89,7 @@ export default function CommunityPage() {
             </div>
           </div>
 
-          <div className="w-full h-[468px] flex-col space-x-0 justify-center items-center bg-[#363636]">
+          <div className="w-full h-full max-h-[468px] flex-col space-x-0 justify-center items-center bg-[#363636] content-center">
             <div className="flex px-[23px]">
               <p className="text-xl text-amber-50 py-[18px]">오늘의 꿀조합</p>
             </div>
@@ -102,7 +102,7 @@ export default function CommunityPage() {
                   <img
                     src={topLikeItem.img}
                     alt={topLikeItem.title}
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full rounded-3xl"
                     style={{ maxHeight: '329px', maxWidth: '329px' }}
                   />
                 </div>
@@ -113,7 +113,7 @@ export default function CommunityPage() {
               </div>
             )}
             {topLikeItem && (
-              <div className="flex pt-[18px]">
+              <div className="flex pt-[18px] pb-[18px]">
                 <div className="pl-[35px]">
                   <ProfileIcon size={32} />
                 </div>
@@ -159,6 +159,7 @@ export default function CommunityPage() {
                         src={`${item.img}`}
                         alt={item.title}
                         loading="lazy"
+                        className="rounded-2xl"
                       />
                     </Link>
                   </ImageListItem>

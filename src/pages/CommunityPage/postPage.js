@@ -41,6 +41,7 @@ export default function PostPage() {
           isLike: data.isLike,
           createdAt: data.createdAt,
           imageSrcArray: data.files.map((file) => file.url),
+          likes: data.likes,
         });
         setIsLike(data.isLike);
       } catch (error) {
@@ -91,6 +92,7 @@ export default function PostPage() {
               user={postData.user}
               content={postData.content}
               isLike={isLike}
+              likes={postData.likes}
               setIsLike={setIsLike}
               createdAt={postData.createdAt}
               imageSrcArray={postData.imageSrcArray}
