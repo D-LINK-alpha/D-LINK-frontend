@@ -15,7 +15,6 @@ const LandingPage = () => {
 useEffect(() => {
   const getMain = async () => {
     const token = cookies.token;
-    console.log(token);
     try{
       const res = await axios.get(
         `${process.env.REACT_APP_REST_API_URL}/api/main`,
@@ -44,11 +43,9 @@ useEffect(() => {
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     const formattedToday = `${year}-${month}-${day}`;
-
     const hasTodayData = mainData.some(item => item.createdAt.split('T')[0] === formattedToday);
-    if (!hasTodayData){
-      setIsModalOpen(true);
-    }
+
+    setIsModalOpen(!hasTodayData);
   }, [mainData]);
 
   return (

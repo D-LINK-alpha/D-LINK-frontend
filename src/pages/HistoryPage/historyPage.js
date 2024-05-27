@@ -116,7 +116,6 @@ const HistoryPage = () => {
                         isRecommended={item.isRecommended}
                         isLike={item.isLike}
                         historyId={item.historyId}
-                        beverageId={item.beverage.id}
                       />
                     ))}
                   </div>
@@ -134,7 +133,6 @@ const HistoryPage = () => {
                         isRecommended={item.isRecommended}
                         isLike={item.isLike}
                         historyId={item.historyId}
-                        beverageId={item.beverage.id}
                       />
                     ))}
                   </>
