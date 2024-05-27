@@ -92,8 +92,10 @@ export default function Posting({
             </div>
           </div>
 
-          <div className="flex pl-[35px]">
-            <p className="text-2xl text-amber-50 pt-[10px]">{title}</p>
+          <div className="flex pl-[35px] text-start">
+            <p className="text-2xl text-amber-50 pt-[10px] max-w-[300px]">
+              {title}
+            </p>
           </div>
           <div className="flex pl-[35px] self-center">
             <div className="pr-[6px] pt-[8px] pb-4">
@@ -103,7 +105,7 @@ export default function Posting({
             {currentUser === user && (
               <button
                 onClick={handleDelete}
-                className="text-[10px] text-red-500 ml-2"
+                className="text-[10px] text-red-500 ml-2 pt-[8px] pb-4"
               >
                 삭제
               </button>
@@ -121,7 +123,7 @@ export default function Posting({
                       <img
                         src={src}
                         alt={`Post Image ${index}`}
-                        className="object-cover w-full h-full min-h-[375px] min-w-[375px]"
+                        className="object-cover min-h-[375px] min-w-[375px] w-full h-full"
                       />
                     </div>
                   ))}
