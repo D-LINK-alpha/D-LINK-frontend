@@ -11,7 +11,8 @@ import { Link } from 'react-router-dom';
 import ProfileIcon from '../../components/Profile/index';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ReactComponent as DrinkSample } from '../../assets/drinkExample/drinkExample.svg';
+// import { ReactComponent as DrinkSample } from '../../assets/drinkExample/drinkExample.svg';
+import PostLoadingPage from '../LoadingPage/postLoadingPage';
 
 export default function CommunityPage() {
   const [isLatestClicked, setIsLatestClicked] = useState(true);
@@ -56,6 +57,10 @@ export default function CommunityPage() {
 
     fetchData();
   }, []);
+
+  if (!topLikeItem) {
+    <PostLoadingPage />;
+  }
 
   const sortedItemData = [...itemData].sort((a, b) => {
     if (isLatestClicked) {
@@ -104,7 +109,7 @@ export default function CommunityPage() {
               </Link>
             ) : (
               <div className="flex justify-center cursor-pointer">
-                <DrinkSample />
+                {/*<DrinkSample />*/}
               </div>
             )}
             {topLikeItem && (
@@ -112,7 +117,7 @@ export default function CommunityPage() {
                 <div className="pl-[35px]">
                   <ProfileIcon size={32} />
                 </div>
-                <div className="pl-[10px] flex-col">
+                <div className="pl-[10px] flex-col text-start">
                   <p className="text-sm text-amber-50 font-bold">
                     {topLikeItem.title}
                   </p>

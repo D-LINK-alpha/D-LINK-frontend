@@ -66,6 +66,9 @@ export default function UploadPage() {
       );
       setNewPostId(response.data.postId); // postId 저장
       setModalIsOpen(true); // 모달 열기
+      if (setModalIsOpen(false)) {
+        navigate('/community');
+      }
     } catch (error) {
       console.error(error);
     }
