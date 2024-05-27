@@ -11,7 +11,8 @@ import { Link } from 'react-router-dom';
 import ProfileIcon from '../../components/Profile/index';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ReactComponent as DrinkSample } from '../../assets/drinkExample/drinkExample.svg';
+// import { ReactComponent as DrinkSample } from '../../assets/drinkExample/drinkExample.svg';
+import PostLoadingPage from '../LoadingPage/postLoadingPage';
 
 export default function CommunityPage() {
   const [isLatestClicked, setIsLatestClicked] = useState(true);
@@ -57,6 +58,10 @@ export default function CommunityPage() {
     fetchData();
   }, []);
 
+  if (!topLikeItem) {
+    <PostLoadingPage />;
+  }
+
   const sortedItemData = [...itemData].sort((a, b) => {
     if (isLatestClicked) {
       // 최신순
@@ -84,7 +89,7 @@ export default function CommunityPage() {
             </div>
           </div>
 
-          <div className="w-full h-[468px] flex-col space-x-0 justify-center items-center bg-[#363636]">
+          <div className="w-full h-full max-h-[468px] flex-col space-x-0 justify-center items-center bg-[#363636] content-center">
             <div className="flex px-[23px]">
               <p className="text-xl text-amber-50 py-[18px]">오늘의 꿀조합</p>
             </div>
@@ -97,22 +102,22 @@ export default function CommunityPage() {
                   <img
                     src={topLikeItem.img}
                     alt={topLikeItem.title}
-                    className="object-cover w-full h-full"
+                    className="object-cover w-full h-full rounded-3xl"
                     style={{ maxHeight: '329px', maxWidth: '329px' }}
                   />
                 </div>
               </Link>
             ) : (
               <div className="flex justify-center cursor-pointer">
-                <DrinkSample />
+                {/*<DrinkSample />*/}
               </div>
             )}
             {topLikeItem && (
-              <div className="flex pt-[18px]">
+              <div className="flex pt-[18px] pb-[18px]">
                 <div className="pl-[35px]">
                   <ProfileIcon size={32} />
                 </div>
-                <div className="pl-[10px] flex-col">
+                <div className="pl-[10px] flex-col text-start">
                   <p className="text-sm text-amber-50 font-bold">
                     {topLikeItem.title}
                   </p>
@@ -154,6 +159,7 @@ export default function CommunityPage() {
                         src={`${item.img}`}
                         alt={item.title}
                         loading="lazy"
+                        className="rounded-2xl"
                       />
                     </Link>
                   </ImageListItem>

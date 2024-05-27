@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import Spinner from '../../assets/loadingSpinner.gif';
-import { ReactComponent as GroupIcon } from '../../assets/iconGroup.svg';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import { useRecoilState } from 'recoil';
 import { userState } from '../../recoil/userState';
+import { ReactComponent as GroupIcon } from '../../assets/iconGroup.svg';
+import Spinner from '../../assets/loadingSpinner.gif';
 
 const LoadingPage = () => {
   const navigate = useNavigate();

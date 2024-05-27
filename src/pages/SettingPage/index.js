@@ -1,21 +1,23 @@
-import Header from '../../components/Layout/Header/Header';
-import Footer from '../../components/Layout/Footer';
 import * as React from 'react';
-import MuiButton from '../../components/Button/muiButton';
-import Profile from '../../components/Profile/index';
-import { ReactComponent as Arrow } from '../../assets/setting/rightarrow.svg';
-import { ReactComponent as Pencil } from '../../assets/setting/pencil.svg';
 import axios from 'axios';
 import { useRecoilState } from 'recoil';
 import { useCookies } from 'react-cookie';
 import { userState } from '../../recoil/userState';
+import Header from '../../components/Layout/Header/Header';
+import Footer from '../../components/Layout/Footer';
+import MuiButton from '../../components/Button/muiButton';
+import Profile from '../../components/Profile/index';
+import { ReactComponent as Arrow } from '../../assets/setting/rightarrow.svg';
+import { ReactComponent as Pencil } from '../../assets/setting/pencil.svg';
 
 export default function SettingPage() {
   const [user, setUser] = useRecoilState(userState);
   const [, setIsEditing] = React.useState(false);
   const [newNickname, setNewNickname] = React.useState(user.nickname);
   const [cookies] = useCookies(['token']);
+
   const token = cookies.token;
+
   const onClick = () => {
     alert('준비 중입니다.');
   };
@@ -112,7 +114,7 @@ export default function SettingPage() {
             <div className="self-center">
               <MuiButton
                 text="개인정보 처리방침"
-                className="bg-[#363636] h-[48px] w-[329px] rounded-2xl justify_between"
+                className="bg-[#363636] h-[48px] w-[329px] rounded-2xl justify-between"
                 endIcon={<Arrow />}
               />
             </div>
