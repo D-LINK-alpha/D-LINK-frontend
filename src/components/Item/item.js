@@ -38,10 +38,10 @@ const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt }) =>
 
   // 배경 색상 및 사이즈 설정
   const bgColor = {
-    coffee: 'bg-[#DF5A21]',  // red
-    latte: 'bg-[#5AC8FA]',  // blue
-    ade: 'bg-[#FFCC00]',  // yellow
-    tea: 'bg-[#3FCC7C]',  // green
+    COFFEE: 'bg-[#DF5A21]',  // red
+    LATTE: 'bg-[#5AC8FA]',  // blue
+    ADE: 'bg-[#FFCC00]',  // yellow
+    TEA: 'bg-[#3FCC7C]',  // green
   };
 
   const small = 'w-[247px] h-[48px] rounded-[17px] mb-[8px] pr-[19px] text-[#232322] text-[14px] font-bold'
