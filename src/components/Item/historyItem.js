@@ -12,7 +12,7 @@ import { ReactComponent as Star } from '../../assets/star.svg';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
-const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike, historyId, beverageId }) => {
+const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike, historyId }) => {
   let iconComponent;
   const [clicked, setClicked] = useState(isLike);
   const onClick = () => {
@@ -27,9 +27,8 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike
     const token = cookies.token;
     try{
       const res = await axios.post(
-        `${process.env.REACT_APP_REST_API_URL}/api/history/recommend`,
+        `${process.env.REACT_APP_REST_API_URL}/api/history/like`,
         {
-          beverageId: beverageId,
           historyId: historyId
         },
         {
@@ -37,7 +36,8 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike
             Authorization: `Bearer ${token}`
           }
         });
-      console.log('getHistory res:', res);
+      if(res.data.msg === 'success')
+        console.log('like res:', res);
     }catch (error){
       console.error('like error!!', error);
     }
@@ -107,7 +107,6 @@ Item.propTypes = {
   drinkType: PropTypes.string.isRequired,
   isRecommended: PropTypes.bool.isRequired,
   isLike: PropTypes.bool.isRequired,
-  beverageId: PropTypes.number.isRequired,
   historyId: PropTypes.number.isRequired,
 };
 
