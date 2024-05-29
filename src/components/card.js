@@ -16,7 +16,7 @@ const Card = ({ item, onClick, isActive }) => {
         </span>
         <div className="max-w-40">
           <span className="truncate overflow-hidden hover:text-clip text-sm text-white font-bold flex justify-start pl-4 max-w-36">
-            {item.menu}
+            {item.name}
           </span>
         </div>
         <div className="pl-4 flex">
@@ -38,7 +38,7 @@ const Card = ({ item, onClick, isActive }) => {
 Card.propTypes = {
   item: PropTypes.shape({
     similarity: PropTypes.string.isRequired,
-    menu: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     cafe: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
   }).isRequired,
