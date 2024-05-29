@@ -5,7 +5,6 @@ import { ReactComponent as FavoriteIcon } from '../../assets/favoriteIcon.svg';
 import Divider from '@mui/material/Divider';
 import { useLocation} from 'react-router-dom';
 import {ReactComponent as DropDownIcon} from '../../assets/dropDownIcon.svg';
-// import { ReactComponent as SampleBeverageImage } from '../../assets/sampleBeverageImage.svg';
 import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
 import { useCookies } from 'react-cookie';
@@ -108,12 +107,11 @@ const RecommendingPage = () => {
       <Header title="Recommendation" />
       <div className="flex flex-col h-screen py-[85px]">
         <div className="overflow-y-scroll">
-          <div className='flex justify-center mb-6 w-[329px] h-[244px] object-center'>
-            {/*<SampleBeverageImage />*/}
-            <img src={src} alt="음료 이미지" />
+          <div className='flex justify-center mb-6 w-full h-[244px]'>
+            <img src={src} alt="음료 이미지" className='rounded-[34px] w-[329px] object-cover border border-neutral-400 ' />
           </div>
           <div className="grid grid-cols-2 justify-items-center items-center">
-            <div className="text-white text-lg font-bold leading-normal">{month} {time},</div>
+            <div className="text-white text-lg font-bold leading-normal mr-3">{month} {time},</div>
             <div className="flex justify-self-end mr-10">
               <FavoriteIcon
                 fill={favoriteIconStyle ? '#3FCC7C' : '#474747'}
