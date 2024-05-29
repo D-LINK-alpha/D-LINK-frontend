@@ -5,7 +5,7 @@ import { ReactComponent as FavoriteIcon } from '../../assets/favoriteIcon.svg';
 import Divider from '@mui/material/Divider';
 import { useLocation} from 'react-router-dom';
 import {ReactComponent as DropDownIcon} from '../../assets/dropDownIcon.svg';
-import { ReactComponent as SampleBeverageImage } from '../../assets/sampleBeverageImage.svg';
+// import { ReactComponent as SampleBeverageImage } from '../../assets/sampleBeverageImage.svg';
 import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
 import { useCookies } from 'react-cookie';
@@ -18,6 +18,8 @@ const RecommendingPage = () => {
   const [favoriteIconStyle, setFavoriteIconStyle] = useState(false); //즐겨찾기 버튼 관리
   const [isDropdownClicked, setIsDropdownClicked] = useState(false);
   const [cookies] = useCookies(['token']);
+  let src = clickedCardData.photo;
+  console.log(clickedCardData);
 
   let month, time;
   const today = new Date();
@@ -47,9 +49,6 @@ const RecommendingPage = () => {
     time = "새벽";
   }
 
-
-  console.log(month);
-  console.log(time);
 
   const recommend = async () => {
     const token = cookies.token;
@@ -109,10 +108,11 @@ const RecommendingPage = () => {
       <Header title="Recommendation" />
       <div className="flex flex-col h-screen py-[85px]">
         <div className="overflow-y-scroll">
-          <div className='flex justify-center mb-6'>
-            <SampleBeverageImage />
+          <div className='flex justify-center mb-6 w-[329px] h-[244px] object-center'>
+            {/*<SampleBeverageImage />*/}
+            <img src={src} alt="음료 이미지" />
           </div>
-          <div className="grid grid-cols-2 justify-items-center  items-center">
+          <div className="grid grid-cols-2 justify-items-center items-center">
             <div className="text-white text-lg font-bold leading-normal">{month} {time},</div>
             <div className="flex justify-self-end mr-10">
               <FavoriteIcon
@@ -124,7 +124,7 @@ const RecommendingPage = () => {
           <br />
           <div className='grid justify-items-start'>
             <span className="text-white text-lg font-bold leading-normal ml-8">{clickedCardData.name}
-              <span className="text-white text-lg font-normal leading-normal">은(는)</span>
+              <span className="text-white text-lg font-normal leading-normal"> 은(는)</span>
             </span>
             <span className="text-white text-lg font-normal leading-normal ml-8">쿠민님의 취향과
               <span className="text-white text-lg font-bold leading-normal"> {clickedCardData.similarity}% </span>
@@ -175,7 +175,7 @@ const RecommendingPage = () => {
                 <span className="text-gray-200 text-sm font-bold leading-5">👀   오설록 티하우스 한남점</span>
                 <span className="text-gray-200 text-sm font-medium leading-5">의 다른 메뉴가 궁금하다면<br /></span>
                 <div className='flex justify-items-start ml-5'>
-                  <span className="text-gray-200 text-sm font-medium leading-5">유자말차에이드를 추천해요.</span>
+                  <span className="text-gray-200 text-sm font-medium leading-5">{clickedCardData.otherBeverage}를 추천해요.</span>
                 </div>
               </div>
             </div>
