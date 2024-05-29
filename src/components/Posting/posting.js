@@ -39,18 +39,22 @@ export default function Posting({
   const [likes, setLikes] = React.useState(initialLikes);
 
   const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const datePart = date.toLocaleDateString('ko-KR', {
+    const utcDate = new Date(dateString); // UTC 시간을 기준으로 Date 객체 생성
+    const koreaTimeOffset = 9 * 60 * 60 * 1000; // 9시간을 밀리초로 변환
+    const koreaDate = new Date(utcDate.getTime() + koreaTimeOffset); // UTC 시간에 9시간을 더함
+
+    const datePart = koreaDate.toLocaleDateString('ko-KR', {
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
     });
-    const timePart = date.toLocaleTimeString('ko-KR', {
+    const timePart = koreaDate.toLocaleTimeString('ko-KR', {
       hour: '2-digit',
       minute: '2-digit',
-      hour12: false,
+      hour12: false, // 24시간 표기법 사용
     });
-    return `${datePart} ${timePart}`;
+
+    return `${datePart} ${timePart.replace(/:/g, ':').replace(/ /g, '')}`; // 시간 포맷 조정
   };
 
   const handleLikeClick = async () => {
