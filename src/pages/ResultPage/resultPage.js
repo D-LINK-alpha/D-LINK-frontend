@@ -15,6 +15,19 @@ const ResultPage = () => {
     ...item,
     similarity: Math.floor(item.similarity * 100)
   }));
+  if( response.length === 0){
+    return(
+      <>
+        <div className="flex items-center justify-items-center">
+          <span>
+            죄송합니다, 요청하신 사항에 알맞는 메뉴를 찾지 못했습니다😭
+          </span>
+          <br />
+          <span>다시 요청해주세요 !!</span>
+        </div>
+      </>
+    );
+  }
   const [data, setData] = useState(new_response);
 
   const [activeCard, setActiveCard] = useState('');
