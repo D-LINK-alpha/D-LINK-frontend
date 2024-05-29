@@ -5,7 +5,7 @@ import { ReactComponent as GreenIcon } from "../../assets/green.svg";
 import { ReactComponent as BlueIcon } from "../../assets/blue.svg";
 import { ReactComponent as YellowIcon } from "../../assets/yellow.svg";
 
-const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt }) => {
+const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt, onClick }) => {
   let iconComponent;
   let iconSize;
   let iconPadding;
@@ -57,7 +57,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt }) =>
   return (
     <>
       {size === 'big' ? (
-        <div className={`flex ${bgColor[drinkType]} ${sizeClass}`}>
+        <div onClick={onClick} className={`flex ${bgColor[drinkType]} ${sizeClass}`}>
           <div className="flex flex-col items-start pl-[28px] pt-[16px]">
             <div className="underline underline-offset-2 text-[18px] font-semibold pl-[5px]">
               {formatDate(date)}
@@ -79,7 +79,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt }) =>
           </div>
         </div>
       ) : (
-        <div className="flex items-center justify-between">
+        <div onClick={onClick} className="flex items-center justify-between">
         <div className="underline underline-offset-2 text-[18px] font-semibold text-white pl-[12px]">
           {formatDate(date)}
         </div>
@@ -100,6 +100,7 @@ Item.propTypes = {
   drinkType: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default Item;
