@@ -12,6 +12,8 @@
 /build
 yarn.lock
 .env
+#key files
+/cert
 
 # Logs
 logs
@@ -43,3 +45,5 @@ lerna-debug.log*
 .settings/
 *.sublime-workspace
 
+# key files
+/cert
