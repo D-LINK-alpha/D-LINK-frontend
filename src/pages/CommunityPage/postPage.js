@@ -81,9 +81,9 @@ export default function PostPage() {
   return (
     <div>
       <Header title="Share Your DLNK" />
-      <div className="flex flex-col h-screen py-[64px]">
+      <div className="flex flex-col h-screen py-[64px] bg-[#EDEDED]">
         <div className="overflow-auto scrollbar-hide">
-          <div className="flex space-x-0 justify-between pt-4 px-[23px] pb-8">
+          <div className="flex space-x-0 justify-between pt-4 px-[23px] pb-8 bg-[#232322]">
             <p className="text-amber-50 text-2xl">Post</p>
           </div>
           <div>
