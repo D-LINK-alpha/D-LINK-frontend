@@ -33,9 +33,25 @@ export default function Posting({
   currentUser,
   postId,
   onDeleteSuccess,
-  likes,
+  likes: initialLikes,
 }) {
   const [cookies] = useCookies(['token']);
+  const [likes, setLikes] = React.useState(initialLikes);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const datePart = date.toLocaleDateString('ko-KR', {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+    const timePart = date.toLocaleTimeString('ko-KR', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    });
+    return `${datePart} ${timePart}`;
+  };
 
   const handleLikeClick = async () => {
     const token = cookies.token;
@@ -50,6 +66,7 @@ export default function Posting({
         },
       );
       setIsLike(!isLike);
+      setLikes((prevLikes) => (isLike ? prevLikes - 1 : prevLikes + 1));
     } catch (error) {
       console.error('Error liking post:', error);
     }
@@ -87,10 +104,18 @@ export default function Posting({
     <div>
       <div className="w-full flex-col space-x-0 justify-center items-center bg-[#EDEDED]">
         <div className="bg-[#363636]">
-          <div className="flex pl-[35px] pr-8 justify-between">
-            <p className="text-[10px] text-[#8E8E8E] pt-[22px]">{createdAt}</p>
-            <div className="mt-[15px]">
-              <div onClick={handleLikeClick} className="self-end">
+          <div className="flex justify-between pr-8">
+            <div className="flex pl-[35px] pr-8">
+              <p className="text-[10px] text-[#8E8E8E] pt-[22px]">
+                {formatDate(createdAt)}
+              </p>
+            </div>
+
+            <div className="mt-[15px] flex-col">
+              <div
+                onClick={handleLikeClick}
+                className="self-end cursor-pointer"
+              >
                 {isLike ? <FullHeart /> : <Heart />}
               </div>
               <div className="text-[10px] text-[#ffffff] self-end flex justify-center">
