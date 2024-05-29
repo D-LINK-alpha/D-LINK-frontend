@@ -1,7 +1,27 @@
 import { PropTypes } from 'prop-types';
-import { ReactComponent as ResultSample } from '../assets/resultSample.svg';
+import * as React from 'react';
+import resultSample from '../assets/resultSample.svg';
+import resultTea from '../assets/resultTea.svg';
+import resultAde from '../assets/resultAde.svg';
+import resultBeverage from '../assets/resultBeverage.svg';
+
+
 
 const Card = ({ item, onClick, isActive }) => {
+  let src;
+  const type = item.type;
+  if(type === "COFFEE"){
+    src = resultSample;
+  }
+  else if(type === "TEA"){
+    src = resultTea;
+  }
+  else if(type === "ADE"){
+    src = resultAde;
+  }
+  else{
+    src = resultBeverage;
+  }
   const borderColor = isActive ? 'border-zinc-100' : 'border-neutral-500';
   return (
     <div
@@ -28,7 +48,11 @@ const Card = ({ item, onClick, isActive }) => {
           </div>
         </div>
         <div className="grid place-items-center">
-          <ResultSample />
+          <img
+            src={src}
+            alt="음료 이미지"
+            className="object-cover h-[138px] w-[138px] "
+          />
         </div>
       </div>
     </div>
@@ -41,6 +65,7 @@ Card.propTypes = {
     name: PropTypes.string.isRequired,
     cafe: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
   }).isRequired,
   onClick: PropTypes.func.isRequired,
   isActive: PropTypes.bool.isRequired,
