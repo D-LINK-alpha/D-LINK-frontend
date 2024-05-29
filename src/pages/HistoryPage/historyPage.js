@@ -5,6 +5,7 @@ import { ReactComponent as BackIcon } from '../../assets/back.svg';
 import Item from '../../components/Item/historyItem';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const HistoryPage = () => {
   const [date, setDate] = useState(new Date());
@@ -17,6 +18,7 @@ const HistoryPage = () => {
   const disRecommendedItems = filteredData.filter(item => !item.isRecommended);
   const isEmpty = recommendedItems.length === 0 && disRecommendedItems.length === 0;
   const [cookies] = useCookies(['token']);
+  const navigate = useNavigate();
 
   const getHistory = async () => {
     const token = cookies.token;
@@ -68,6 +70,10 @@ const HistoryPage = () => {
     });
   };
 
+  const itemClicked = () => {
+    navigate('/recommendingPage')
+  };
+
 
   return (
     <div>
@@ -116,6 +122,7 @@ const HistoryPage = () => {
                         isRecommended={item.isRecommended}
                         isLike={item.isLike}
                         historyId={item.historyId}
+                        itemClick={itemClicked}
                       />
                     ))}
                   </div>
@@ -133,6 +140,7 @@ const HistoryPage = () => {
                         isRecommended={item.isRecommended}
                         isLike={item.isLike}
                         historyId={item.historyId}
+                        itemClick={itemClicked}
                       />
                     ))}
                   </>

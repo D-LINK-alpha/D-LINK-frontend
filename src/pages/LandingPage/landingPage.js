@@ -5,12 +5,14 @@ import Footer from '../../components/Layout/Footer';
 import Modal from '../../components/Modal/modal';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mainData, setMainData] = useState([]);
   const [nickname, setNickname] = useState('');
   const [cookies] = useCookies(['token']);
+  const navigate = useNavigate();
 
 useEffect(() => {
   const getMain = async () => {
@@ -48,6 +50,10 @@ useEffect(() => {
     setIsModalOpen(!hasTodayData);
   }, [mainData]);
 
+  const itemClicked = () => {
+    navigate('/recommendingPage')
+  };
+
   return (
     <>
       <InfoBar name={'쿠민'}/>
@@ -72,6 +78,7 @@ useEffect(() => {
                 drinkType={item.beverage.type}
                 size={index === 0 ? 'big' : 'small'}
                 createdAt={item.createdAt}
+                onClick={itemClicked}
               />
             ))}
           </div>

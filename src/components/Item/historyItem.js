@@ -12,7 +12,7 @@ import { ReactComponent as Star } from '../../assets/star.svg';
 import axios from 'axios';
 import { useCookies } from 'react-cookie';
 
-const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike, historyId }) => {
+const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike, historyId, itemClick }) => {
   let iconComponent;
   const [clicked, setClicked] = useState(isLike);
   const onClick = () => {
@@ -68,7 +68,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike
 
 
   return (
-      <div className={`flex items-center w-[329px] bg-[#EDEDED] mb-[10px] ${boxStyle}`}>
+      <div onClick={itemClick} className={`flex items-center w-[329px] bg-[#EDEDED] mb-[10px] ${boxStyle}`}>
         {isRecommended === true ? (
           <>
             <div className={`${iconSize} flex-shrink-0`}>
@@ -108,6 +108,7 @@ Item.propTypes = {
   isRecommended: PropTypes.bool.isRequired,
   isLike: PropTypes.bool.isRequired,
   historyId: PropTypes.number.isRequired,
+  itemClick: PropTypes.func.isRequired,
 };
 
 export default Item;
