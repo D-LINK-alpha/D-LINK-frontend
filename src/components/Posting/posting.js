@@ -111,7 +111,7 @@ export default function Posting({
               </p>
             </div>
 
-            <div className="mt-[15px] flex-col">
+            <div className="mt-[15px] flex">
               <div
                 onClick={handleLikeClick}
                 className="self-end cursor-pointer"
@@ -119,7 +119,7 @@ export default function Posting({
                 {isLike ? <FullHeart /> : <Heart />}
               </div>
               <div className="text-[10px] text-[#ffffff] self-end flex justify-center">
-                <p className="pt-[2px]">{likes}</p>
+                <p className="pl-4">{likes}</p>
               </div>
             </div>
           </div>
