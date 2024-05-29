@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ReactComponent as TrakingIcon } from '../../assets/trakingIcon.svg';
@@ -7,6 +7,44 @@ import { ReactComponent as HistoryIcon } from '../../assets/historyIcon.svg';
 import { ReactComponent as MyPageIcon } from '../../assets/myPageInModal.svg';
 
 const Modal = ({ isOpen, name }) => {
+  const [latitude, setLatitude] = useState(null); // 위도
+  const [longitude, setLongitude] = useState(null); // 경도
+  const [address, setAddress] = useState(''); // 주소
+
+  useEffect(() => {
+    const success = (position) => {
+      const lat = position.coords.latitude;
+      const lon = position.coords.longitude;
+      setLatitude(lat);
+      setLongitude(lon);
+      let geocoder = new window.kakao.maps.services.Geocoder();
+      // 비동기적으로 주소 변환 수행
+      geocoder.coord2Address(lon, lat, (result, status) => {
+        if (status === window.kakao.maps.services.Status.OK) {
+          const address_part = result[0].address.region_2depth_name +' '+result[0].address.region_3depth_name;
+          setAddress(address_part);
+        } else {
+          console.error('Geocoder failed due to: ' + status);
+        }
+      });
+    };
+
+    const failure = (error) => {
+      console.log(error.message);
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, failure);
+    } else {
+      console.log('Geolocation is not supported by this browser.');
+    }
+  }, []);
+
+  console.log(latitude);
+  console.log(longitude);
+  console.log(address);
+
+
   if (!isOpen) {
     return null;
   }
@@ -15,7 +53,7 @@ const Modal = ({ isOpen, name }) => {
       <div className="flex flex-col items-center bg-[#EDEDED] w-[298px] h-[444px] rounded-[21px] pt-[20px]">
         <div className="flex items-center bg-[#FFFFFF] w-[256px] h-[37px] rounded-[11px] text-[14px] pl-[8px]">
           <TrakingIcon className="m-[6px]" />
-          용산구 이태원동
+          {address}
         </div>
         <div className="text-[16px] font-bold pt-[17px] pb-[3px]">
           최근 추천 받은 음료가 없어요.
