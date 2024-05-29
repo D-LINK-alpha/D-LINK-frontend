@@ -75,7 +75,7 @@ export default function CommunityPage() {
   return (
     <div>
       <Header title="Share Your DLNK" />
-      <div className="flex flex-col h-screen py-[64px]">
+      <div className="flex flex-col h-screen py-[64px] pb-[83px]">
         <div className="overflow-auto scrollbar-hide">
           <div className="flex space-x-0 justify-between pt-4 px-[23px] pb-8">
             <p className="text-amber-50 text-2xl">Community</p>
