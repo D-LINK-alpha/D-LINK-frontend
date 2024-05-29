@@ -102,7 +102,7 @@ export default function CommunityPage() {
                   <img
                     src={topLikeItem.img}
                     alt={topLikeItem.title}
-                    className="object-cover w-full h-full rounded-3xl"
+                    className="object-cover w-full h-full min-h-[329px] rounded-3xl"
                     style={{ maxHeight: '329px', maxWidth: '329px' }}
                   />
                 </div>
