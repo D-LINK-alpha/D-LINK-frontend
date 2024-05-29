@@ -20,6 +20,38 @@ const RecommendingPage = () => {
   const [isDropdownClicked, setIsDropdownClicked] = useState(false);
   const [cookies] = useCookies(['token']);
 
+  let month, time;
+  const today = new Date();
+  if ((today.getMonth() + 1) === 1 || (today.getMonth() + 1) === 12 || (today.getMonth() + 1) === 2) {
+    month = "입김이 나오는 겨울";
+  }
+  else if ((today.getMonth() + 1) === 3 || (today.getMonth() + 1) === 4 || (today.getMonth() + 1) === 5) {
+    month = "따뜻한 봄";
+  }
+  else if ((today.getMonth() + 1) === 6 || (today.getMonth() + 1) === 7 || (today.getMonth() + 1) === 8) {
+    month = "더운 여름";
+  }
+  else {
+    month = "쌀쌀한 가을";
+  }
+
+  if (today.getHours() === 7 || today.getHours() === 8 || today.getHours() === 9 || today.getHours() === 10) {
+    time = "아침";
+  }
+  else if (today.getHours() === 11 || today.getHours() === 12 || today.getHours() === 13 || today.getHours() === 14 || today.getHours() === 15 || today.getHours() === 16) {
+    time = "낮";
+  }
+  else if (today.getHours() === 17 || today.getHours() === 18 || today.getHours() === 19 || today.getHours() === 20 || today.getHours() === 21 || today.getHours() === 22) {
+    time = "저녁";
+  }
+  else {
+    time = "새벽";
+  }
+
+
+  console.log(month);
+  console.log(time);
+
   const recommend = async () => {
     const token = cookies.token;
     try{
@@ -82,7 +114,7 @@ const RecommendingPage = () => {
             <SampleBeverageImage />
           </div>
           <div className="grid grid-cols-2 justify-items-center  items-center">
-            <div className="text-white text-lg font-bold leading-normal">비오는 가을 아침,</div>
+            <div className="text-white text-lg font-bold leading-normal">{month} {time},</div>
             <div className="flex justify-self-end mr-10">
               <FavoriteIcon
                 fill={favoriteIconStyle ? '#3FCC7C' : '#474747'}
@@ -92,11 +124,11 @@ const RecommendingPage = () => {
           </div>
           <br />
           <div className='grid justify-items-start'>
-            <span className="text-white text-lg font-bold leading-normal ml-8">{clickedCardData.menu}
-              <span className="text-white text-lg font-normal leading-normal">은</span>
+            <span className="text-white text-lg font-bold leading-normal ml-8">{clickedCardData.name}
+              <span className="text-white text-lg font-normal leading-normal">은(는)</span>
             </span>
             <span className="text-white text-lg font-normal leading-normal ml-8">쿠민님의 취향과
-              <span className="text-white text-lg font-bold leading-normal"> {clickedCardData.similarity} </span>
+              <span className="text-white text-lg font-bold leading-normal"> {clickedCardData.similarity}% </span>
               일치해요.</span>
           </div>
           <br />
@@ -104,11 +136,11 @@ const RecommendingPage = () => {
           <div className="flex flex-col ml-8 gap-y-3.5 ">
             <div className="w-52 h-8 bg-neutral-700 rounded-lg flex justify-between items-center">
               <span className="text-white text-base font-semibold leading-3 ml-4">Price </span>
-              <span className="text-white text-base font-semibold leading-3 mr-4">{clickedCardData.price}</span>
+              <span className="text-white text-base font-semibold leading-3 mr-4">{clickedCardData.price}원</span>
             </div>
             <div className="w-72 h-8 bg-neutral-700 rounded-lg flex items-center">
               <span className="text-white text-base font-semibold leading-3 ml-4 mr-2">Nutrition Facts</span>
-              <span className="text-white text-base font-semibold leading-3 ml-12 ">347kcal</span>
+              <span className="text-white text-base font-semibold leading-3 ml-12 ">{clickedCardData.nutrition.kcal}kcal</span>
               <DropDownIcon className="ml-4" onClick={handledDropdownClick} />
             </div>
           </div>
@@ -119,7 +151,12 @@ const RecommendingPage = () => {
                     className="text-left text-neutral-400 text-xs font-medium leading-2 ml-5">당류<br />단백질<br />포화지방<br />나트륨<br />카페인
                   </div>
                   <div
-                    className="text-right text-neutral-400 text-xs font-medium leading-2 mr-5 ">44g<br />10g<br />7g<br />152mg<br />129mg
+                    className="text-right text-neutral-400 text-xs font-medium leading-2 mr-5 ">
+                    {clickedCardData.nutrition.sugar}g<br />
+                    {clickedCardData.nutrition.protein}g<br />
+                    {clickedCardData.nutrition.fat}g<br />
+                    {clickedCardData.nutrition.natrium}mg<br />
+                    {clickedCardData.nutrition.caffein}mg
                   </div>
                 </div>
               </div>

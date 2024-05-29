@@ -14,6 +14,7 @@ import UploadPage from './pages/CommunityPage/uploadPage';
 import PostPage from './pages/CommunityPage/postPage';
 import HistoryPage from './pages/HistoryPage/historyPage';
 import SettingPage from './pages/SettingPage/index';
+import PromptLoadingPage from './pages/PromptPage/promptLoading';
 
 const App = () => {
   return (
@@ -31,7 +32,7 @@ const App = () => {
         <Route path="/result" element={<ResultPage />} />
         <Route path="/result/recommendingPage" element={<RecommendingPage />} />
         <Route path="/loading" element={<LoadingPage />} />
-
+        <Route path="/promptloading" element={<PromptLoadingPage />} />
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/community/upload" element={<UploadPage />} />
         <Route path="/community/post" element={<PostPage />} />
