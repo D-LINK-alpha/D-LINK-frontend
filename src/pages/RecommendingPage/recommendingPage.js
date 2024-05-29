@@ -15,7 +15,6 @@ import axios from 'axios';
 const RecommendingPage = () => {
   const location = useLocation();
   const clickedCardData = location.state.cardData;//클릭된 카드 데이터값 가져옴
-  const clickedCardId = location.state.id;
   const [favoriteIconStyle, setFavoriteIconStyle] = useState(false); //즐겨찾기 버튼 관리
   const [isDropdownClicked, setIsDropdownClicked] = useState(false);
   const [cookies] = useCookies(['token']);
@@ -58,7 +57,7 @@ const RecommendingPage = () => {
       const res = await axios.post(
         `${process.env.REACT_APP_REST_API_URL}/api/history/recommend`,
         {
-          beverageId: clickedCardId+1,
+          beverageId: clickedCardData.beverageId,
           similarity: clickedCardData.similarity
         },
         {
@@ -79,7 +78,7 @@ const RecommendingPage = () => {
       const res = await axios.post(
         `${process.env.REACT_APP_REST_API_URL}/api/history/like-main`,
         {
-          beverageId: clickedCardId+1,
+          beverageId: clickedCardData.beverageId,
         },
         {
           headers: {
@@ -87,7 +86,7 @@ const RecommendingPage = () => {
           }
         });
       if(res.data.msg === 'success')
-        console.log(clickedCardData.id);
+        console.log(clickedCardData.beverageId);
         console.log('like res:', res);
     }catch (error){
       console.error('like error!!', error);
