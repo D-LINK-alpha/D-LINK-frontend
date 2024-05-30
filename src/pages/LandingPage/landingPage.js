@@ -45,13 +45,19 @@ useEffect(() => {
     const month = String(today.getMonth() + 1).padStart(2, '0');
     const day = String(today.getDate()).padStart(2, '0');
     const formattedToday = `${year}-${month}-${day}`;
-    const hasTodayData = mainData.some(item => item.createdAt.split('T')[0] === formattedToday);
+    const hasTodayData = mainData.some(item => formatDate(item.createdAt).split('T')[0] === formattedToday);
 
     setIsModalOpen(!hasTodayData);
   }, [mainData]);
 
-  const itemClicked = () => {
-    navigate('/recommendingPage')
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    date.setHours(date.getHours() + 9);
+    return date.toISOString();
+  }
+
+  const itemClicked = (itemData) => {
+    navigate('/result/recommendingPage', { state: { cardData: itemData } })
   };
 
   return (
@@ -77,8 +83,8 @@ useEffect(() => {
                 cafeName={item.beverage.cafe}
                 drinkType={item.beverage.type}
                 size={index === 0 ? 'big' : 'small'}
-                createdAt={item.createdAt}
-                onClick={itemClicked}
+                createdAt={formatDate(item.createdAt)}
+                onClick={() => itemClicked(item.beverage)}
               />
             ))}
           </div>
