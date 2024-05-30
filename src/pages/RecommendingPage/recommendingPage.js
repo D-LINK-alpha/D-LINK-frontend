@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import { ReactComponent as FavoriteIcon } from '../../assets/favoriteIcon.svg';
@@ -17,8 +17,15 @@ const RecommendingPage = () => {
   const [favoriteIconStyle, setFavoriteIconStyle] = useState(false); //즐겨찾기 버튼 관리
   const [isDropdownClicked, setIsDropdownClicked] = useState(false);
   const [cookies] = useCookies(['token']);
+  const [hideContents, setHideContents] = useState(false);
   let src = clickedCardData.photo;
   console.log(clickedCardData);
+
+  useEffect(() => {
+    if (location.state.from === '/main' || location.state.from === '/history') {
+      setHideContents(true);
+    }
+  }, [location]);
 
   let month, time;
   const today = new Date();
@@ -112,12 +119,14 @@ const RecommendingPage = () => {
           </div>
           <div className="grid grid-cols-2 justify-items-center items-center">
             <div className="text-white text-lg font-bold leading-normal mr-3">{month} {time},</div>
-            <div className="flex justify-self-end mr-10">
-              <FavoriteIcon
-                fill={favoriteIconStyle ? '#3FCC7C' : '#474747'}
-                onClick={handleFavButtonClick}
-              />
-            </div>
+            {!hideContents && (
+              <div className="flex justify-self-end mr-10">
+                <FavoriteIcon
+                  fill={favoriteIconStyle ? '#3FCC7C' : '#474747'}
+                  onClick={handleFavButtonClick}
+                />
+              </div>
+            )}
           </div>
           <br />
           <div className='grid justify-items-start'>
@@ -169,6 +178,7 @@ const RecommendingPage = () => {
                 <span className="text-gray-200 text-sm font-bold leading-5">오설록 티하우스 한남점</span>
                 <span className="text-gray-200 text-sm font-medium leading-5">에서 마실 수 있어요.</span>
               </div>
+              {!hideContents && (
               <div>
                 <span className="text-gray-200 text-sm font-bold leading-5">👀   오설록 티하우스 한남점</span>
                 <span className="text-gray-200 text-sm font-medium leading-5">의 다른 메뉴가 궁금하다면<br /></span>
@@ -176,8 +186,9 @@ const RecommendingPage = () => {
                   <span className="text-gray-200 text-sm font-medium leading-5">{clickedCardData.otherBeverage}를 추천해요.</span>
                 </div>
               </div>
+                )}
             </div>
-
+            {!hideContents && (
             <Box className="flex gap-x-4 mt-8" sx={{ borderRadius: '22px' }}>
               <Button
                 variant="contained"
@@ -195,6 +206,7 @@ const RecommendingPage = () => {
                 다시 추천 받을래요
               </Button>
             </Box>
+            )}
           </div>
           </div>
       </div>
