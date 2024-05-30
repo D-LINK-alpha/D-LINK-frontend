@@ -128,10 +128,8 @@ export default function Posting({
             </div>
           </div>
 
-          <div className="flex pl-[35px] text-start">
-            <p className="text-2xl text-amber-50 pt-[10px] max-w-[300px]">
-              {title}
-            </p>
+          <div className="flex px-[35px] text-start pt-3">
+            <p className="text-2xl text-amber-50 pt-[10px]]">{title}</p>
           </div>
           <div className="flex pl-[35px] self-center">
             <div className="pr-[6px] pt-[8px] pb-4">
