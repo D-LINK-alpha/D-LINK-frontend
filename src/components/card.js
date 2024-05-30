@@ -40,10 +40,10 @@ const Card = ({ item, onClick, isActive }) => {
           </span>
         </div>
         <div className="pl-4 flex">
-          <div className="text-white text-xs truncate justify-start">
+          <div className="text-white text-[10px] truncate justify-start">
             {item.cafe}
           </div>
-          <div className="text-white text-xs pl-2 justify-start">
+          <div className="text-white text-[10px] pl-2 justify-start">
             {item.price}
           </div>
         </div>

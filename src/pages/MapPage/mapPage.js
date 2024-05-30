@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Header from '../../components/Layout/Header/Header';
-import Footer from '../../components/Layout/Footer'
+import Footer from '../../components/Layout/Footer';
 
 const { kakao } = window;
 
 const MapPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { placeName } = location.state || {};
   const [userLocation, setUserLocation] = useState(null);
+  const [selectedPlace, setSelectedPlace] = useState(null);
 
   useEffect(() => {
-    console.log(placeName);
     if (!placeName) return;
 
     // 사용자의 현재 위치 가져오기
@@ -60,7 +61,7 @@ const MapPage = () => {
       }
     }
 
-    // 지도에 마커를 표시하고 infowindow를 등록하는 함수
+    // 지도에 마커를 표시하고 커스텀 오버레이를 등록하는 함수
     function displayMarker(place) {
       const marker = new kakao.maps.Marker({
         map: map,
@@ -69,21 +70,37 @@ const MapPage = () => {
 
       // 마커에 클릭 이벤트를 등록
       kakao.maps.event.addListener(marker, 'click', function() {
-        const infowindow = new kakao.maps.InfoWindow({
-          content: `<div style="padding:10px;">${place.place_name}<br>${place.address_name}</div>`
-        });
-        infowindow.open(map, marker);
+        setSelectedPlace(place);
       });
     }
   }, [userLocation, placeName]);
 
+  const handleHomeButtonClicked = () => {
+    navigate('/main');
+  };
 
   return (
     <>
       <Header title="Map" />
-      <div className="flex flex-col h-screen py-[85px]">
-        <div className="overflow-y-scroll">
-          <div id="map" className='w-full h-screen' ></div>
+      <div className="flex flex-col h-screen pt-[85px] pb-[83px]">
+        <div className="flex-grow overflow-y-hidden relative">
+          <div id="map" className="w-full h-full"></div>
+          {selectedPlace && (
+            <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 w-11/12 max-w-md bg-white border-t border-gray-200 shadow-md p-4 z-50 rounded-3xl"> {/* bottom-24 으로 footer 공간 확보, width 줄이고 border-radius 50px 설정 */}
+              <div className="flex justify-between items-center">
+                <div>
+                  <div className="text-lg font-bold">{selectedPlace.place_name}</div>
+                  <div className="text-gray-500 mt-1">{selectedPlace.address_name}</div>
+                </div>
+                <button
+                  className="text-red-500 ml-4"
+                  onClick={handleHomeButtonClicked}
+                >
+                  홈으로 돌아가기
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
       <Footer />

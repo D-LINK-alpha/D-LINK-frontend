@@ -13,7 +13,7 @@ const ResultPage = () => {
   console.log(response);
   const new_response = response.map(item => ({
     ...item,
-    similarity: Math.floor(item.similarity * 100)
+    similarity: Math.floor(item.similarity )
   }));
   if( response.length === 0){
     return(
