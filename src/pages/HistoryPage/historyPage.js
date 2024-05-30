@@ -38,6 +38,11 @@ const HistoryPage = () => {
     }
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    date.setHours(date.getHours() + 9);
+    return date.toISOString();
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,7 +50,7 @@ const HistoryPage = () => {
 
       // 날짜별로 데이터 분류
       const filtered = data.filter(item => {
-        const itemDate = new Date(item.createdAt);
+        const itemDate = new Date(formatDate(item.createdAt));
         return (
           itemDate.getFullYear() === date.getFullYear() &&
           itemDate.getMonth() === date.getMonth() &&
