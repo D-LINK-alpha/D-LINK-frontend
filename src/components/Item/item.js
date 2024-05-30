@@ -17,7 +17,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt, onCl
       iconSize = 'w-[120px] h-[120px]';
       iconPadding = 'pr-[16px] pb-[4px]';
       break;
-    case 'LATTE':
+    case 'BEVERAGE':
       iconComponent = <BlueIcon />;
       iconSize = 'w-[102px] h-[101px]';
       iconPadding = 'pr-[24px] pb-[22px]';
@@ -39,7 +39,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt, onCl
   // 배경 색상 및 사이즈 설정
   const bgColor = {
     COFFEE: 'bg-[#DF5A21]',  // red
-    LATTE: 'bg-[#5AC8FA]',  // blue
+    BEVERAGE: 'bg-[#5AC8FA]',  // blue
     ADE: 'bg-[#FFCC00]',  // yellow
     TEA: 'bg-[#3FCC7C]',  // green
   };
