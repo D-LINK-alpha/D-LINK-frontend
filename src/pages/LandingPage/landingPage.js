@@ -56,8 +56,21 @@ useEffect(() => {
     return date.toISOString();
   }
 
-  const itemClicked = (itemData) => {
-    navigate('/result/recommendingPage', { state: { cardData: itemData } })
+  const itemClicked = (item) => {
+    const cardData = {
+      name: item.beverage.name,
+      similarity: item.similarity,
+      cafeName: item.beverage.cafe,
+      drinkType: item.beverage.type,
+      isRecommended: item.isRecommended,
+      isLike: item.isLike,
+      historyId: item.historyId,
+      nutrition: item.beverage.nutrition,
+      price: item.beverage.price,
+      photo: item.beverage.photo, // 추가: 음료 이미지
+      beverageId: item.beverage.id, // 추가: 음료 ID
+    };
+    navigate('/result/recommendingPage', { state: { cardData } })
   };
 
   return (
@@ -84,7 +97,7 @@ useEffect(() => {
                 drinkType={item.beverage.type}
                 size={index === 0 ? 'big' : 'small'}
                 createdAt={formatDate(item.createdAt)}
-                onClick={() => itemClicked(item.beverage)}
+                onClick={() => itemClicked(item)}
               />
             ))}
           </div>
