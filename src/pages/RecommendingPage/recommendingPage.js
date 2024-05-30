@@ -8,6 +8,8 @@ import {ReactComponent as DropDownIcon} from '../../assets/dropDownIcon.svg';
 import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
 import { useCookies } from 'react-cookie';
+import { useRecoilValue} from 'recoil';
+import { userState} from '../../recoil/userState';
 import axios from 'axios';
 
 
@@ -19,7 +21,7 @@ const RecommendingPage = () => {
   const [cookies] = useCookies(['token']);
   const [hideContents, setHideContents] = useState(false);
   let src = clickedCardData.photo;
-  console.log(clickedCardData);
+  const nickname = useRecoilValue(userState).nickname;
 
   useEffect(() => {
     if (location.state.from === '/main' || location.state.from === '/history') {
@@ -112,7 +114,7 @@ const RecommendingPage = () => {
   return (
     <>
       <Header title="Recommendation" />
-      <div className="flex flex-col h-screen py-[85px]">
+      <div className="flex flex-col justify-items-start px-[23px]  h-screen py-[85px]">
         <div className="overflow-y-scroll">
           <div className='flex justify-center mb-6 w-full h-[244px]'>
             <img src={src} alt="음료 이미지" className='rounded-[34px] w-[329px] object-cover border border-neutral-400 ' />
@@ -130,10 +132,10 @@ const RecommendingPage = () => {
           </div>
           <br />
           <div className='grid justify-items-start'>
-            <span className="text-white text-lg font-bold leading-normal ml-8">{clickedCardData.name}
+            <span className="text-white text-lg font-bold leading-normal ml-5">{clickedCardData.name}
               <span className="text-white text-lg font-normal leading-normal"> 은(는)</span>
             </span>
-            <span className="text-white text-lg font-normal leading-normal ml-8">쿠민님의 취향과
+            <span className="text-white text-lg font-normal leading-normal ml-5 ">{nickname}님의 취향과
               <span className="text-white text-lg font-bold leading-normal"> {clickedCardData.similarity}% </span>
               일치해요.</span>
           </div>

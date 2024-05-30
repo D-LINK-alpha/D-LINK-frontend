@@ -5,7 +5,6 @@ import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
 import { useNavigate } from 'react-router-dom';
 
-
 const PromptPage = () => {
   const [text, setText] = useState('');
   const maxLength = 200; // 최대 글자 수

@@ -29,7 +29,7 @@ const Card = ({ item, onClick, isActive }) => {
       onClick={onClick}
     >
       <div
-        className={`border ${borderColor} bg-neutral-700 rounded-3xl max-w-40 max-h-60 w-full`}
+        className={`border ${borderColor} bg-neutral-700 rounded-3xl h-[240px] max-w-40 max-h-60 w-full`}
       >
         <span className="text-white text-4xl flex justify-start pl-4 pt-6">
           {item.similarity}
@@ -47,11 +47,11 @@ const Card = ({ item, onClick, isActive }) => {
             {item.price}
           </div>
         </div>
-        <div className="grid place-items-center">
+        <div className="grid place-items-center h-[138px]">
           <img
             src={src}
             alt="음료 이미지"
-            className="object-cover h-[138px] w-[138px] "
+            className="h-[100px] w-[100px] "
           />
         </div>
       </div>

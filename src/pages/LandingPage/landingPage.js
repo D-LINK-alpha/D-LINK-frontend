@@ -3,12 +3,14 @@ import Item from '../../components/Item/item';
 import InfoBar from '../../components/Layout/Header/infoBar';
 import Footer from '../../components/Layout/Footer';
 import Modal from '../../components/Modal/modal';
+import {ReactComponent as Map } from '../../assets/map.svg';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const LandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMapVisible, setIsMapVisible] =useState(false);
   const [mainData, setMainData] = useState([]);
   const [nickname, setNickname] = useState('');
   const [cookies] = useCookies(['token']);
@@ -48,6 +50,7 @@ useEffect(() => {
     const hasTodayData = mainData.some(item => formatDate(item.createdAt).split('T')[0] === formattedToday);
 
     setIsModalOpen(!hasTodayData);
+    setIsMapVisible(hasTodayData);
   }, [mainData]);
 
   const formatDate = (dateString) => {
@@ -73,6 +76,11 @@ useEffect(() => {
     navigate('/result/recommendingPage', { state: { cardData , from: '/main' }})
   };
 
+  const placeName = mainData.length > 0 ? mainData[0].beverage.cafe : '';
+
+  const mapClicked = () => {
+      navigate('/map', { state: { placeName: placeName}});
+  }
   return (
     <>
       <InfoBar name={'쿠민'}/>
@@ -102,6 +110,7 @@ useEffect(() => {
             ))}
           </div>
           <Modal isOpen={isModalOpen} name={nickname} />
+          {isMapVisible && <Map className="px-[23px]" onClick={mapClicked}/>}
         </div>
       </div>
       <Footer />
