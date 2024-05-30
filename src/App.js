@@ -15,6 +15,7 @@ import PostPage from './pages/CommunityPage/postPage';
 import HistoryPage from './pages/HistoryPage/historyPage';
 import SettingPage from './pages/SettingPage/index';
 import PromptLoadingPage from './pages/PromptPage/promptLoading';
+import MapPage from './pages/MapPage/mapPage';
 
 const App = () => {
   return (
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="/community/post/:postId" element={<PostPage />} />
         <Route path="/history" element={<HistoryPage />} />
         <Route path="/setting" element={<SettingPage />} />
+        <Route path="/map" element={<MapPage />} />
       </Routes>
     </div>
   );
