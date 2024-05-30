@@ -49,7 +49,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike
       iconComponent = isRecommended ? <BigRedIcon /> : <SmallRedIcon />;
       iconSize = 'w-[59px] h-[59px] ml-[9px] mr-[4px]';
       break
-    case 'LATTE':
+    case 'BEVERAGE':
       iconComponent = isRecommended ? <BigBlueIcon /> : <SmallBlueIcon />;
       iconSize = 'w-[40px] h-[40px] ml-[19px] mr-[13px]';
       break;
@@ -75,7 +75,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, isRecommended, isLike
               {iconComponent}
             </div>
             <div className="text-[28px] flex-shrink-0">
-              {similarity}
+              {similarity}%
             </div>
             <div className="flex flex-col text-left flex-grow pl-[20px]">
               <div className="text-[12px]">

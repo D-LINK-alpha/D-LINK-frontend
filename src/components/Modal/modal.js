@@ -74,7 +74,7 @@ const Modal = ({ isOpen, name }) => {
             <HistoryIcon className="mr-[7px]" />
             추천 히스토리 보기
           </Link>
-          <Link to="/history" className="flex">
+          <Link to="/setting" className="flex">
             <MyPageIcon className="mr-[7px]" />
             MY PAGE
           </Link>
