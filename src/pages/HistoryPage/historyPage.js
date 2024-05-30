@@ -89,7 +89,7 @@ const HistoryPage = () => {
       photo: item.beverage.photo, // 추가: 음료 이미지
       beverageId: item.beverage.id, // 추가: 음료 ID
     };
-    navigate('/result/recommendingPage', { state: { cardData } })
+    navigate('/result/recommendingPage', { state: { cardData , from: '/main' }})
   };
 
 
