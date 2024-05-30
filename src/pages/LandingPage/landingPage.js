@@ -8,6 +8,7 @@ import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+
 const LandingPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMapVisible, setIsMapVisible] =useState(false);
@@ -86,7 +87,7 @@ useEffect(() => {
   }
   return (
     <>
-      <InfoBar name={'쿠민'}/>
+      <InfoBar name={nickname}/>
       <div className="flex flex-col h-screen pt-[75px] pb-[83px]">
         <div className="flex-1">
           <div className="flex justify-between items-end text-white text-[24px] pt-[18px] pl-[35px]">
