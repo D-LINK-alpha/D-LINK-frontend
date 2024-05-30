@@ -11,9 +11,6 @@ const PromptLoading = () => {
   const [ cookies ] = useCookies(['token']);
   const navigate = useNavigate();
 
-  console.log(text);
-  const recommend_cafes = places.slice(0,4);
-  console.log(recommend_cafes);
 
   const promptPost = async () => {
     const token = cookies.token;

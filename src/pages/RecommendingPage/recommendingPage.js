@@ -3,7 +3,7 @@ import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import { ReactComponent as FavoriteIcon } from '../../assets/favoriteIcon.svg';
 import Divider from '@mui/material/Divider';
-import { useLocation} from 'react-router-dom';
+import { useLocation,useNavigate} from 'react-router-dom';
 import {ReactComponent as DropDownIcon} from '../../assets/dropDownIcon.svg';
 import Header from '../../components/Layout/Header/Header';
 import Footer from '../../components/Layout/Footer';
@@ -22,6 +22,7 @@ const RecommendingPage = () => {
   const [hideContents, setHideContents] = useState(false);
   let src = clickedCardData.photo;
   const nickname = useRecoilValue(userState).nickname;
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (location.state.from === '/main' || location.state.from === '/history') {
@@ -74,6 +75,9 @@ const RecommendingPage = () => {
         });
       if(res.data.msg === '이걸로 할래요 성공')
         console.log('recommend res:', res);
+        navigate('/map', {
+        state: { placeName: clickedCardData.cafe },
+      })
     }catch (error){
       console.error('recommend error!!', error);
     }
@@ -108,7 +112,9 @@ const RecommendingPage = () => {
   const handledDropdownClick = () => {
     setIsDropdownClicked(!isDropdownClicked);
   }
-
+  const handleReStartButtonClicked = () => {
+    navigate('/prompt');
+  };
 
 
   return (
@@ -177,12 +183,12 @@ const RecommendingPage = () => {
             <div className="grid gap-y-3.5">
               <div>
                 <span className="text-gray-200 text-sm font-medium leading-5">👍   지금 </span>
-                <span className="text-gray-200 text-sm font-bold leading-5">오설록 티하우스 한남점</span>
+                <span className="text-gray-200 text-sm font-bold leading-5">{clickedCardData.cafe}</span>
                 <span className="text-gray-200 text-sm font-medium leading-5">에서 마실 수 있어요.</span>
               </div>
               {!hideContents && (
               <div>
-                <span className="text-gray-200 text-sm font-bold leading-5">👀   오설록 티하우스 한남점</span>
+                <span className="text-gray-200 text-sm font-bold leading-5">👀 {clickedCardData.cafe}</span>
                 <span className="text-gray-200 text-sm font-medium leading-5">의 다른 메뉴가 궁금하다면<br /></span>
                 <div className='flex justify-items-start ml-5'>
                   <span className="text-gray-200 text-sm font-medium leading-5">{clickedCardData.otherBeverage}를 추천해요.</span>
@@ -204,6 +210,7 @@ const RecommendingPage = () => {
                 variant="contained"
                 size="medium"
                 style={{ backgroundColor: '#474747', borderRadius: '22px' }}
+                onClick={handleReStartButtonClicked}
               >
                 다시 추천 받을래요
               </Button>
