@@ -92,7 +92,14 @@ const PromptPage = () => {
             <InputSample />
             <div className="absolute">
               <textarea
-                placeholder="내용을 입력해주세요."
+                placeholder="음료 추천을 받기 위해 현재 상황을 묘사해주세요.
+                기분이 어떤지, 마시고 싶은 음료의 종류, 맛,
+                제외하고 싶은 특성 등을 적어주세요.
+
+
+                Ex)
+                따뜻한 녹차 맛 음료, 피곤함, 달달한 맛, 카페인 제외,
+                자주 먹던 음료 종류 중 하나."
                 className="relative z-10 pt-8 bg-transparent focus:outline-none
               w-[263px] h-[200px]
               text-sm font-normal resize-none"
