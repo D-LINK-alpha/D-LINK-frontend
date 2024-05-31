@@ -63,7 +63,7 @@ const Item = ({drinkName, similarity, cafeName, drinkType, size, createdAt, onCl
               {formatDate(date)}
             </div>
             <div className="text-[48px]">
-              {similarity}
+              {similarity}%
             </div>
             <div className="text-[12px] pt-[8px]">
               {cafeName}

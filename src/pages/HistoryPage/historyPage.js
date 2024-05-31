@@ -79,7 +79,7 @@ const HistoryPage = () => {
     const cardData = {
       name: item.beverage.name,
       similarity: item.similarity,
-      cafeName: item.beverage.cafe,
+      cafe: item.beverage.cafe,
       drinkType: item.beverage.type,
       isRecommended: item.isRecommended,
       isLike: item.isLike,
