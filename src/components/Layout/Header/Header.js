@@ -33,7 +33,7 @@ export default function Header({ title }) {
             edge="start"
             color="main"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            sx={{ mr: 2, visibility: title === 'Get Your DLNK !' ? 'hidden' : 'visible' }}
             onClick={goBack} // 클릭 시 뒤로가기 함수 실행
           >
             <BackIcon />
